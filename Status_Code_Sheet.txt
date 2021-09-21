@@ -1,0 +1,15 @@
+STATUS CODE SHEET
+
+Types of users
+--------------
+Admin = 0
+Patient = 1
+Specialist = 2
+
+
+Registering User Response CODE
+------------------------------
+Registered successfully = 0
+User exists = 1
+
+

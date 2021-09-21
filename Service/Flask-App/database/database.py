@@ -7,19 +7,10 @@ class Database():
         pass
 
 
-        # self.name = name
-        # self.surname = surname
-        # self.ID_Number = ID_Number
-        # self.email = email
-        # self.password = password
-        # self.contact = contact
-        # self.type = type
-        # self.resetcode = ''
-        # self.signup_date = datetime.datetime.now()
 
     
-   ############# User Management ################
 
+#region User Management
     def getUsers(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
         self.cursor = self.connection.cursor()
@@ -53,7 +44,10 @@ class Database():
         self.cursor.execute(query)
         self.connection.commit()
         self.connection.close()
+#endregion
 
+
+#region Specialists Management
 
     def RegisterSpecialist(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
@@ -61,17 +55,19 @@ class Database():
         self.cursor.execute(query)
         self.connection.commit()
         self.connection.close()
-        # insert_user = "INSERT INTO User VALUES(" 
-        # + specialist.name + "," 
-        # + specialist.surname + "," 
-        # + specialist.ID_Number + "," 
-        # + specialist.email + "," 
-        # + specialist.password + ","
-        # + specialist.contact + ","
-        # + specialist.type + ","
-        # + specialist.resetcode + ","
-        # + specialist.signup_date + ")"
-        # self.cursor
+
+    def updateSpecialist(self, query: str):
+        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.connection.close()
+
+#endregion
+
+
+#region Patients
+
 
     def RegisterPatient(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
@@ -87,25 +83,30 @@ class Database():
         self.connection.commit()
         self.connection.close()
 
-    def getPatient(self, query: str):
-        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
-        self.cursor = self.connection.cursor()
-        self.cursor.execute(query)
-        row = self.cursor.fetchall()
-        self.connection.commit()
-        self.connection.close()
-        return row
+#endregion
 
+    
+#region Admin
 
-    def updateSpecialist(self, query: str):
+    def RegisterAdmin(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
         self.cursor = self.connection.cursor()
         self.cursor.execute(query)
         self.connection.commit()
         self.connection.close()
-                                
 
-    ############# Health Sector Management ###########
+    def updateAdmin(self, query: str):
+        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.connection.close()
+
+
+#endregion
+
+
+#region Health Sector Management
 
     def AddHealthSector(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
@@ -141,7 +142,11 @@ class Database():
         return row
 
 
-    ########### Appointment Management ###########
+#endregion
+    
+
+
+#region Appointment Management
     def addAppointment(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
         self.cursor = self.connection.cursor()
@@ -167,18 +172,6 @@ class Database():
         self.connection.close()
         return row    
 
-
-        
-
+#endregion                
 
 
-
-# select_all_users = "SELECT * FROM user WHERE id = 2"
-# cursor.execute(select_all_users)
-
-# rows = cursor.fetchone()
-# print(rows)
-
-
-# connection.commit()
-# connection.close()

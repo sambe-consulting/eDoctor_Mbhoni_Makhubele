@@ -4,6 +4,8 @@ from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
 from flask import jsonify
 from models.users.admin import Admin
+from models.users.patient import Patient
+from models.users.specialist import Specialist
 
 from database.database import Database
 
@@ -29,42 +31,87 @@ class Login(Resource):
         pass
 
 class Register(Resource):
-    def post(self):
-        # _userType = 0
-        # if(_userType == 0): #If admin
-        #     user = User()
-        #     qery = "INSERT INTO User VALUES(" + user.ID_Number + ","\
-        #                                     + user.name + ","\
-        #                                     + user.middle_name + ","\
-        #                                     + user.surname + ","\
-        #                                     + user.contact + ","\
-        #                                     + user.email + ","\
-        #                                     + user.password + ","\
-        #                                     + user.DOB + ","\
-        #                                     + user.gender + ","\
-        #                                     + user.type + ","\
-        #                                     + user.signup_date + ","\
-        #                                     + user.resetcode + ")"
-                                            
-        # elif(_userType == 1): #If patient
-        #     pass
-        # else: #If specialist
-        #     pass
 
-        user = Admin()
-        qery = "INSERT INTO User VALUES(" + user.ID_Number + ","\
-                                        + user.name + ","\
-                                        + user.middle_name + ","\
-                                        + user.surname + ","\
-                                        + user.contact + ","\
-                                        + user.email + ","\
-                                        + user.password + ","\
-                                        + user.DOB + ","\
-                                        + user.gender + ","\
-                                        + user.type + ","\
-                                        + user.signup_date + ","\
-                                        + user.resetcode + ")"
-        return 1
+
+
+    def post(self):
+        data = Database()
+        json_data = request.get_json(force=False)
+        _userType = name = json_data['Type']
+        _user_ID = json_data['ID_Number']
+
+        #users = GetUsers()
+
+
+
+        if(_userType == 0): #If admin
+            user = Admin(
+                    json_data['ID_Number'],
+                    json_data['Name'],
+                    json_data['M_Name'],
+                    json_data['Surname'],
+                    json_data['Contact'],
+                    json_data['Email'],
+                    json_data['Password'],
+                    json_data['DOB'],
+                    json_data['Gender'],
+                    json_data['Type'],
+                    json_data['EmployeeNumber'],
+                    json_data['EmployeeFrom'],
+            )
+            
+            query = "INSERT INTO User VALUES('" + user.ID_Number + "','"\
+                                               + user.name + "','"\
+                                               + user.middle_name + "','"\
+                                               + user.surname + "','"\
+                                               + user.contact + "','"\
+                                               + user.email + "','"\
+                                               + user.password + "',"\
+                                               + user.DOB + ",'"\
+                                               + user.gender + "',"\
+                                               + str(user.type) + ","\
+                                               + str(user.signup_date) + ",'"\
+                                               + "AAAA" + "')"\
+                                                       
+            data.RegisterUser(query)
+            query = "INSERT INTO Admin VALUES('" + user.ID_Number + "','"\
+                                          + user.employee_number + "','"\
+                                          + user.employeeFrom + "')"
+            data.RegisterAdmin(query)
+          
+            
+                                            
+        elif(_userType == 1): #If patient
+            user = Patient()
+            qery = "INSERT INTO User VALUES(" + user.ID_Number + ","\
+                                            + user.name + ","\
+                                            + user.middle_name + ","\
+                                            + user.surname + ","\
+                                            + user.contact + ","\
+                                            + user.email + ","\
+                                            + user.password + ","\
+                                            + user.DOB + ","\
+                                            + user.gender + ","\
+                                            + user.type + ","\
+                                            + user.signup_date + ","\
+                                            + user.resetcode + ")"
+        else: #If specialist
+            user = Specialist()
+            qery = "INSERT INTO User VALUES(" + user.ID_Number + ","\
+                                            + user.name + ","\
+                                            + user.middle_name + ","\
+                                            + user.surname + ","\
+                                            + user.contact + ","\
+                                            + user.email + ","\
+                                            + user.password + ","\
+                                            + user.DOB + ","\
+                                            + user.gender + ","\
+                                            + user.type + ","\
+                                            + user.signup_date + ","\
+                                            + user.resetcode + ")"
+        
+
+        return {'quey': query}
                                           
 
 

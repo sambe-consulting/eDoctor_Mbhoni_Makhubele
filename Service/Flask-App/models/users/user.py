@@ -2,10 +2,19 @@ from abc import ABC
 import datetime
 
 class User(ABC):
-    def __init__(self, name,middle_name,gender, DOB,surname, ID_Number, email, password, contact, type):
+    def __init__(self, ID_Number, 
+                         name,
+                         m_name, 
+                         surname, 
+                         contact, 
+                         email, 
+                         password, 
+                         DOB, 
+                         gender, 
+                         type):
         self.name = name
         self.surname = surname
-        self.middle_name = middle_name
+        self.middle_name = m_name
         self.ID_Number = ID_Number
         self.email = email
         self.password = password
@@ -14,7 +23,7 @@ class User(ABC):
         self.gender = gender
         self.type = type
         self.resetcode = ''
-        self.signup_date = datetime.datetime.now()
+        self.signup_date = datetime.date.today()
 
         #User Types
         # 0 Admin
@@ -41,6 +50,10 @@ class User(ABC):
 
 
     ########## Getters ########
+    @property
+    def getID_Number(self):
+        return self.ID_Number
+
     @property
     def getName(self):
         return self.name
