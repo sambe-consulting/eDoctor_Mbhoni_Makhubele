@@ -8,6 +8,7 @@ from models.users.patient import Patient
 from models.users.specialist import Specialist
 
 from database.database import Database
+from models.sector import Sector
 
 
 
@@ -42,7 +43,6 @@ class Register(Resource):
         UserExist = False
 
         users = GetUsers()
-        #return jsonify(users.get()['Users'])
 
         for user in users.get()['Users']:
             if(user['ID_Number'] == _user_ID):
@@ -161,15 +161,10 @@ class GetUser(Resource):
     def get(self, user_id):
         response = []
         data = Database()
-        #query = "SELECT * FROM User LEFT JOIN Patient ON User.ID_Number = Patient.ID_Number LEFT JOIN Admin ON User.ID_Number = Admin.ID_Number LEFT JOIN Specialist ON User.ID_Number = Specialist.ID_Number WHERE User.ID_Number ='"+ (user_id) + "'"
-        
         query = "SELECT * FROM User LEFT JOIN Patient ON User.ID_Number = Patient.ID_Number "\
                                    "LEFT JOIN Admin ON User.ID_Number = Admin.ID_Number "\
                                    "LEFT JOIN Specialist ON User.ID_Number = Specialist.ID_Number "\
                                    "WHERE User.ID_Number = '" + (user_id) + "'"
-
-
-        
 
         _user = data.getUser(query)
         #return len(rows)
@@ -254,12 +249,89 @@ class GetUsers(Resource):
 
 class RegisterSector(Resource):
     def post(self):
-        pass
+        data = Database()
+        json_data = request.get_json(force=False)
+        sector = Sector(json_data['Name'],
+                        json_data['Owner'],
+                        json_data['Website'],
+                        json_data['Address'],
+                        json_data['Longitude'],
+                        json_data['latitude'],
+                        json_data['B_Hours_Open'],
+                        json_data['B_Hours_Close'],
+                        json_data['Founded'],
+                        json_data['Description'],
+                        json_data['isActivate'],
+                        json_data['ConsultationFee'],
+                        json_data['Contact'],
+                        json_data['Email'],
+                        json_data['Password'])
+        
+
+        query = "INSERT INTO Health_Sector( Name,"\
+                                            "Owner,"\
+                                            "Website,"\
+                                            "Address,"\
+                                            "Longitude,"\
+                                            "latitude,"\
+                                            "B_Hours_Open,"\
+                                            "B_Hours_Close,"\
+                                            "Founded,"\
+                                            "Description,"\
+                                            "isActive,"\
+                                            "ConsultationFee,"\
+                                            "Contact,"\
+                                            "Email,"\
+                                            "Password)"\
+                                        + "VALUES('" + sector.name + "','"\
+                                                     + sector.owner + "','"\
+                                                     + sector.website_url + "','"\
+                                                     + sector.address + "','"\
+                                                     + sector.longitude + "','"\
+                                                     + sector.latitude + "','"\
+                                                     + sector.b_h_open + "','"\
+                                                     + sector.b_h_close + "','"\
+                                                     + sector.founded + "','"\
+                                                     + sector.description + "','"\
+                                                     + sector.isActive + "','"\
+                                                     + sector.consultationFee + "','"\
+                                                     + sector.contact + "','"\
+                                                     + sector.email + "','"\
+                                                     + sector.password + "')"
+        data.AddHealthSector(query) 
+        
 
 class GetSectors(Resource):
     def get(self):
-        pass
+        response = []
+        data = Database()
+        query = "SELECT * FROM Health_Sector"
+        sectors = data.getHealthSectors(query)
 
+        if(sectors):
+            for sector in sectors:
+                _sector = { 
+                    "id": sector[0],   
+                    "Name": sector[1],
+                    "Owner": sector[2],
+                    "Website": sector[3],
+                    "Address": sector[4],
+                    "Longitude": sector[5],
+                    "latitude": sector[6],
+                    "B_Hours_Open": sector[7],
+                    "B_Hours_Close": sector[8],
+                    "Founded": sector[9],
+                    "Description": sector[10],
+                    "isActivate": sector[11],
+                    "ConsultationFee": sector[12],
+                    "Contact": sector[13],
+                    "Email": sector[14],
+                    "Password": sector[15]
+                }
+                response.append(_sector)
+        
+        return response
+                
 class GetSector(Resource):
     def get(self, sector_id):
         pass
@@ -348,5 +420,7 @@ api.add_resource(BookSpecialist, '/bookAppointment')
 api.add_resource(GetUsers, '/Users')
 api.add_resource(GetUser, '/User/<string:user_id>')
 api.add_resource(Register, '/RegisterUser')
+api.add_resource(RegisterSector, '/RegisterSector')
+api.add_resource(GetSectors, '/Sectors')
 
 app.run(port=5000)

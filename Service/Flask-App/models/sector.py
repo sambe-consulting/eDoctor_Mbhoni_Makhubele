@@ -1,5 +1,19 @@
 class Sector:
-    def __init__(self, name, owner, website_url, address, longitude, latitude,b_h_open, b_h_close, founded, description):
+    def __init__(self, name, 
+                       owner, 
+                       website_url, 
+                       address, 
+                       longitude, 
+                       latitude, 
+                       b_h_open, 
+                       b_h_close, 
+                       founded, 
+                       description,
+                       isActive,
+                       consultationFee,
+                       contact,
+                       email,
+                       password):
         self.name = name
         self.owner = owner
         self.website_url = website_url
@@ -10,7 +24,12 @@ class Sector:
         self.b_h_close = b_h_close
         self.founded = founded
         self.description = description
-        self.specialists: list
+        self.isActive = isActive
+        self.consultationFee = consultationFee
+        self.contact = contact
+        self.email = email
+        self.password = password
+        self.specialists: list = []
 
 
     #setters

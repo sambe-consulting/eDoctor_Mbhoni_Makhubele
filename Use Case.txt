@@ -1,0 +1,13 @@
+############ Patient ############# 02:26:00
+
+1. Register Patient = done
+2. Update patient's profile = not done
+3. Deactivate account = not done
+4. Delete account = not done
+5. Book appointment = not done
+6. Cancel appointment = not done
+7. Search health Sectors = not done
+8. Rate Specialist = not done
+9. Chat with Specialist = not done
+10.Get diagnosed  = not done
+

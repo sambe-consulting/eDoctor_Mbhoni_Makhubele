@@ -1,3 +1,5 @@
+############### Different Types of users #################
+
 {
     "Users": [
         {
@@ -65,4 +67,25 @@
             "DateEmployed": "12/03/2020"
         }
     ]
+}
+
+
+################## Health Sectors ###################
+
+{
+    "Name": "MEL Life",
+    "Owner": "Joe Mac",
+    "Website": "www.mellife.com",
+    "Address": "14409 Mokgomang Street, Ivory park, 1632",
+    "Longitude": "-23.4321434",
+    "latitude": "12.453564",
+    "B_Hours_Open": "08:00 AM",
+    "B_Hours_Close": "15:00 PM",
+    "Founded": "12/02/2007",
+    "Description": "We are dentist specialist",
+    "isActivate": "1",
+    "ConsultationFee": "250.00",
+    "Contact": "0739293305",
+    "Email": "www.info@mellife.com",
+    "Password": "12345678"
 }

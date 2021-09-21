@@ -7,9 +7,22 @@ Patient = 1
 Specialist = 2
 
 
-Registering User Response CODE
+Item Registration Response CODE
 ------------------------------
-Registered successfully = 0
-User exists = 1
+Registration successful = 0
+Item exists = 1
+Unknown error = anything else
+
+
+Item Retrieval Response CODE
+----------------------------
+FOUND = 1
+NULL = 2
+
+
+Active status CODE
+----------------------
+ACTIVE = 1
+DEACTIVATED = 2
 
 
