@@ -39,79 +39,121 @@ class Register(Resource):
         json_data = request.get_json(force=False)
         _userType = name = json_data['Type']
         _user_ID = json_data['ID_Number']
+        UserExist = False
 
-        #users = GetUsers()
+        users = GetUsers()
+        #return jsonify(users.get()['Users'])
 
+        for user in users.get()['Users']:
+            if(user['ID_Number'] == _user_ID):
+                UserExist = True
+    
 
+        if(UserExist):
+            return 0
+        else:
+            if(_userType == 0): #If admin
+                user = Admin(
+                        json_data['ID_Number'],
+                        json_data['Name'],
+                        json_data['M_Name'],
+                        json_data['Surname'],
+                        json_data['Contact'],
+                        json_data['Email'],
+                        json_data['Password'],
+                        json_data['DOB'],
+                        json_data['Gender'],
+                        json_data['Type'],
+                        json_data['EmployeeNumber'],
+                        json_data['EmployeeFrom'],
+                )
+                
+                query = "INSERT INTO User VALUES('" + user.ID_Number + "','"\
+                                                + user.name + "','"\
+                                                + user.middle_name + "','"\
+                                                + user.surname + "','"\
+                                                + user.contact + "','"\
+                                                + user.email + "','"\
+                                                + user.password + "',"\
+                                                + user.DOB + ",'"\
+                                                + user.gender + "',"\
+                                                + str(user.type) + ","\
+                                                + str(user.signup_date) + ",'"\
+                                                + "AAAA" + "')"\
+                                                        
+                data.RegisterUser(query)
+                query = "INSERT INTO Admin VALUES('" + user.ID_Number + "','"\
+                                            + user.employee_number + "','"\
+                                            + user.employeeFrom + "')"
 
-        if(_userType == 0): #If admin
-            user = Admin(
-                    json_data['ID_Number'],
-                    json_data['Name'],
-                    json_data['M_Name'],
-                    json_data['Surname'],
-                    json_data['Contact'],
-                    json_data['Email'],
-                    json_data['Password'],
-                    json_data['DOB'],
-                    json_data['Gender'],
-                    json_data['Type'],
-                    json_data['EmployeeNumber'],
-                    json_data['EmployeeFrom'],
-            )
-            
-            query = "INSERT INTO User VALUES('" + user.ID_Number + "','"\
-                                               + user.name + "','"\
-                                               + user.middle_name + "','"\
-                                               + user.surname + "','"\
-                                               + user.contact + "','"\
-                                               + user.email + "','"\
-                                               + user.password + "',"\
-                                               + user.DOB + ",'"\
-                                               + user.gender + "',"\
-                                               + str(user.type) + ","\
-                                               + str(user.signup_date) + ",'"\
-                                               + "AAAA" + "')"\
-                                                       
-            data.RegisterUser(query)
-            query = "INSERT INTO Admin VALUES('" + user.ID_Number + "','"\
-                                          + user.employee_number + "','"\
-                                          + user.employeeFrom + "')"
-            data.RegisterAdmin(query)
-          
-            
-                                            
-        elif(_userType == 1): #If patient
-            user = Patient()
-            qery = "INSERT INTO User VALUES(" + user.ID_Number + ","\
-                                            + user.name + ","\
-                                            + user.middle_name + ","\
-                                            + user.surname + ","\
-                                            + user.contact + ","\
-                                            + user.email + ","\
-                                            + user.password + ","\
-                                            + user.DOB + ","\
-                                            + user.gender + ","\
-                                            + user.type + ","\
-                                            + user.signup_date + ","\
-                                            + user.resetcode + ")"
-        else: #If specialist
-            user = Specialist()
-            qery = "INSERT INTO User VALUES(" + user.ID_Number + ","\
-                                            + user.name + ","\
-                                            + user.middle_name + ","\
-                                            + user.surname + ","\
-                                            + user.contact + ","\
-                                            + user.email + ","\
-                                            + user.password + ","\
-                                            + user.DOB + ","\
-                                            + user.gender + ","\
-                                            + user.type + ","\
-                                            + user.signup_date + ","\
-                                            + user.resetcode + ")"
-        
+                data.RegisterAdmin(query)
+                                                
+            elif(_userType == 1): #If patient
+                user = Patient(
+                        json_data['ID_Number'],
+                        json_data['Name'],
+                        json_data['M_Name'],
+                        json_data['Surname'],
+                        json_data['Contact'],
+                        json_data['Email'],
+                        json_data['Password'],
+                        json_data['DOB'],
+                        json_data['Gender'],
+                        json_data['Type'],
+                        json_data['Longitude'],
+                        json_data['Latitude'],
+                )
+                
+                query = "INSERT INTO User VALUES('" + user.ID_Number + "','"\
+                                                + user.name + "','"\
+                                                + user.middle_name + "','"\
+                                                + user.surname + "','"\
+                                                + user.contact + "','"\
+                                                + user.email + "','"\
+                                                + user.password + "',"\
+                                                + user.DOB + ",'"\
+                                                + user.gender + "',"\
+                                                + str(user.type) + ","\
+                                                + str(user.signup_date) + ",'"\
+                                                + "AAAA" + "')"\
+                
+                data.RegisterUser(query)
+                query = "INSERT INTO Patient VALUES('" + user.ID_Number + "','"\
+                                                + str(user.longitude) + "','"\
+                                                + str(user.latitude) + "')"
+                data.RegisterPatient(query)
+            else: #If specialist
+                user = Specialist(
+                        json_data['ID_Number'],
+                        json_data['Name'],
+                        json_data['M_Name'],
+                        json_data['Surname'],
+                        json_data['Contact'],
+                        json_data['Email'],
+                        json_data['Password'],
+                        json_data['DOB'],
+                        json_data['Gender'],
+                        json_data['Type'],
+                        json_data['EmployeeNumber'],
+                        json_data['EmployeeFrom'],
+                )
+                
+                query = "INSERT INTO User VALUES('" + user.ID_Number + "','"\
+                                                + user.name + "','"\
+                                                + user.middle_name + "','"\
+                                                + user.surname + "','"\
+                                                + user.contact + "','"\
+                                                + user.email + "','"\
+                                                + user.password + "',"\
+                                                + user.DOB + ",'"\
+                                                + user.gender + "',"\
+                                                + str(user.type) + ","\
+                                                + str(user.signup_date) + ",'"\
+                                                + "AAAA" + "')"\
+                                                        
+                data.RegisterUser(query)
 
-        return {'quey': query}
+            return 1 # User registered successfully
                                           
 
 

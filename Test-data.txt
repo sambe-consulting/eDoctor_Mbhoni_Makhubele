@@ -1,0 +1,68 @@
+{
+    "Users": [
+        {
+            "ID_Number": "9104255585081",
+            "Name": "Enelo",
+            "Middle_Name": "Clement",
+            "Surname": "Makhubele",
+            "Contact": "0739293305",
+            "Email": "Enelo99@gmail.com",
+            "Password": "Enelo",
+            "DOB": "12/01/2012",
+            "Gender": "Male",
+            "Type": 1,
+            "Signup_Date": "20/09/2021",
+            "Rest_Code": "EISS",
+            "Longitude": -22.0034,
+            "Latitude": 44.83727
+        },
+        {
+            "ID_Number": "0204255585081",
+            "Name": "Nollin",
+            "Middle_Name": "Ntsetselo",
+            "Surname": "Mabasa",
+            "Contact": "0737898188",
+            "Email": "Nollinm2@gmail.com",
+            "Password": "Nollin33",
+            "DOB": "25/04/2002",
+            "Gender": "Female",
+            "Type": 1,
+            "Signup_Date": "20/09/2021",
+            "Rest_Code": "DKFS",
+            "Longitude": -32.0233,
+            "Latitude": 23.0032
+        },
+        {
+            "ID_Number": "0002255585081",
+            "Name": "Jonas",
+            "Middle_Name": "Martin",
+            "Surname": "Wool",
+            "Contact": "0739293305",
+            "Email": "Nollinm2@gmail.com",
+            "Password": "Nollin33",
+            "DOB": "25/04/2021",
+            "Gender": "Male",
+            "Type": 1,
+            "Signup_Date": "20/09/2021",
+            "Rest_Code": "DKFD",
+            "Longitude": -23.4443,
+            "Latitude": 11.34505
+        },
+        {
+            "ID_Number": "9112335585081",
+            "Name": "Akani",
+            "Middle_Name": "Lloyd",
+            "Surname": "Chauke",
+            "Contact": "0742347744",
+            "Email": "Joe@gmail.com",
+            "Password": "Studio88",
+            "DOB": 0,
+            "Gender": "Male",
+            "Type": 0,
+            "Signup_Date": 1991,
+            "Rest_Code": "AAAA",
+            "Employee_Number": "2324",
+            "DateEmployed": "12/03/2020"
+        }
+    ]
+}
