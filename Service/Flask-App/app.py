@@ -32,31 +32,36 @@ class Login(Resource):
         pass
 
 class Register(Resource):
-
-
-
     def post(self):
         data = Database()
         json_data = request.get_json(force=False)
         _userType = name = json_data['Type']
         _user_ID = json_data['ID_Number']
+        _user_Email = json_data['Email']
         UserExist = False
+        StatusCode = 0
 
         users = GetUsers()
 
         for user in users.get()['Users']:
-            if(user['ID_Number'] == _user_ID):
+            if(user['ID_Number'] == _user_ID and user['Email'] == _user_Email):
                 UserExist = True
+            elif(user['ID_Number'] == _user_ID):
+                UserExist = True
+                StatusCode = 0.1
+            elif(user['Email'] == _user_Email):
+                UserExist = True
+                StatusCode = 0.2
     
 
         if(UserExist):
-            return 0
+            return StatusCode
         else:
             if(_userType == 0): #If admin
                 user = Admin(
                         json_data['ID_Number'],
                         json_data['Name'],
-                        json_data['M_Name'],
+                        json_data['Middle_Name'],
                         json_data['Surname'],
                         json_data['Contact'],
                         json_data['Email'],
@@ -92,7 +97,7 @@ class Register(Resource):
                 user = Patient(
                         json_data['ID_Number'],
                         json_data['Name'],
-                        json_data['M_Name'],
+                        json_data['Middle_Name'],
                         json_data['Surname'],
                         json_data['Contact'],
                         json_data['Email'],
@@ -126,7 +131,7 @@ class Register(Resource):
                 user = Specialist(
                         json_data['ID_Number'],
                         json_data['Name'],
-                        json_data['M_Name'],
+                        json_data['Middle_Name'],
                         json_data['Surname'],
                         json_data['Contact'],
                         json_data['Email'],
@@ -134,8 +139,9 @@ class Register(Resource):
                         json_data['DOB'],
                         json_data['Gender'],
                         json_data['Type'],
-                        json_data['EmployeeNumber'],
-                        json_data['EmployeeFrom'],
+                        json_data['YearsExperience'],
+                        json_data['AccountStatus'],
+                        json_data['HealthSectorID']
                 )
                 
                 query = "INSERT INTO User VALUES('" + user.ID_Number + "','"\
@@ -144,14 +150,21 @@ class Register(Resource):
                                                 + user.surname + "','"\
                                                 + user.contact + "','"\
                                                 + user.email + "','"\
-                                                + user.password + "',"\
-                                                + user.DOB + ",'"\
-                                                + user.gender + "',"\
-                                                + str(user.type) + ","\
-                                                + str(user.signup_date) + ",'"\
+                                                + user.password + "','"\
+                                                + user.DOB + "','"\
+                                                + user.gender + "','"\
+                                                + str(user.type) + "','"\
+                                                + str(user.signup_date) + "','"\
                                                 + "AAAA" + "')"\
                                                         
                 data.RegisterUser(query)
+                
+                query = "INSERT INTO Specialist VALUES('" + user.ID_Number + "','"\
+                                                          + user.years_experience + "','"\
+                                                          + user.accountStatus + "','"\
+                                                          + user.healthSectorID + "')"\
+                                                              
+                data.RegisterSpecialist(query)
 
             return 1 # User registered successfully
                                           

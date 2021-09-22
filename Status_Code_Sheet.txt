@@ -9,8 +9,13 @@ Specialist = 2
 
 Item Registration Response CODE
 ------------------------------
-Registration successful = 0
-Item exists = 1
+Registration successful = 1
+
+Item exists[Both Email and ID exists] = 0
+Item ID exists = 0.1
+Item Email exists = 0.2
+
+
 Unknown error = anything else
 
 

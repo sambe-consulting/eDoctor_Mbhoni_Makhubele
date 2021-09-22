@@ -1,3 +1,5 @@
+#from users.specialist import Specialist
+
 class Sector:
     def __init__(self, name, 
                        owner, 
@@ -30,6 +32,12 @@ class Sector:
         self.email = email
         self.password = password
         self.specialists: list = []
+
+    # def RegisterSpecialist(self, specialist: Specialist):
+    #     self.specialists.append(specialist)
+
+    # def getSpecialists(self):
+    #     return self.specialists
 
 
     #setters
