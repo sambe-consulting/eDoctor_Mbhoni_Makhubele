@@ -147,7 +147,7 @@ class Database():
 
 
 #region Appointment Management
-    def addAppointment(self, query: str):
+    def BookAppointment(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
         self.cursor = self.connection.cursor()
         self.cursor.execute(query)

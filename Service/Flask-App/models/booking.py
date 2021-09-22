@@ -1,15 +1,15 @@
 from datetime import datetime
 
 class Booking:
-    def __init__(self, name, description, date, duration, patient_id, specialist_id):
-        self.name = name
+    def __init__(self, subject, description, date, duration, patient_id, specialist_id):
+        self.subject = subject
         self.description = description
         self.date = date
         self.duration = duration
         self.specialist_id = specialist_id
         self.patient_id = patient_id
         self.dateCreated = str(datetime.today())
-        self.status = 0 
+        self.status = "0" 
 
         # 0 = await approval
         # 1 = approved

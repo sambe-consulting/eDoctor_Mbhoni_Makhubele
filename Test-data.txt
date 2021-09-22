@@ -89,3 +89,13 @@
     "Email": "www.info@mellife.com",
     "Password": "12345678"
 }
+
+
+########## Booking #################
+
+"Subject": ,
+"Description": ,
+"Date": ,
+"Duration": ,
+"Patient_ID": ,
+"Specialist_ID": 

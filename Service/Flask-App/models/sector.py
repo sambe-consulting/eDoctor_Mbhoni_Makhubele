@@ -11,7 +11,6 @@ class Sector:
                        b_h_close, 
                        founded, 
                        description,
-                       isActive,
                        consultationFee,
                        contact,
                        email,
@@ -26,11 +25,12 @@ class Sector:
         self.b_h_close = b_h_close
         self.founded = founded
         self.description = description
-        self.isActive = isActive
+        self.isActive = "1"
         self.consultationFee = consultationFee
         self.contact = contact
         self.email = email
         self.password = password
+        self.aproval = "0"
         self.specialists: list = []
 
     # def RegisterSpecialist(self, specialist: Specialist):

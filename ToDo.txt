@@ -1,0 +1,1 @@
+1. Add approval column in Health Sector table, they must be approved by admin before they can be visible

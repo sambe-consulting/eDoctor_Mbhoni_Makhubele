@@ -14,7 +14,6 @@ class Specialist(User):
                        gender, 
                        type, 
                        years_experience,
-                       accountStatus,
                        healthSectorID):
         super().__init__(ID_Number, 
                          name,
@@ -27,7 +26,7 @@ class Specialist(User):
                          gender, 
                          type)
         self.years_experience = years_experience
-        self.accountStatus = accountStatus
+        self.accountStatus = "1"
         self.healthSectorID = healthSectorID
         self.qualification = []
         self.expertise = []

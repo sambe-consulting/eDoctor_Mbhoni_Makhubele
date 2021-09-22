@@ -30,4 +30,10 @@ Active status CODE
 ACTIVE = 1
 DEACTIVATED = 2
 
+Sector approval
+---------------------
+NOT_APPROVED = 0
+APROVED = 1
+
+
 
