@@ -12,10 +12,13 @@ from models.users.specialist import Specialist
 
 from database.database import Database
 from models.sector import Sector
+from flask_cors import CORS
+
 
 
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 app.config['DEBUG']=True
 
@@ -31,8 +34,30 @@ class hello(Resource):
 ########## user management #################
 
 class Login(Resource):
-    def get(self, email, password):
-        pass
+    def post(self):
+        print("Yes")
+        data = Database()
+        json_data = request.get_json(force=False)
+        username = json_data['username']
+        password = json_data['password']
+
+        query = "SELECT * FROM User LEFT JOIN Patient ON User.ID_Number = Patient.ID_Number "\
+                                   "LEFT JOIN Admin ON User.ID_Number = Admin.ID_Number "\
+                                   "LEFT JOIN Specialist ON User.ID_Number = Specialist.ID_Number "\
+                                   "WHERE User.Email = '" + (username) + "'"
+        user = data.getUser(query)
+
+        if user:
+            if user[6] == password:
+                _user = GetUser.get(self, user[0])
+                return _user
+            else:
+                return 1
+        else:
+            return None
+
+
+        
 
 class Register(Resource):
     def post(self):
@@ -595,6 +620,7 @@ class BookingResponse(Resource):
 
 
 api.add_resource(hello,'/')
+api.add_resource(Login,'/login')
 api.add_resource(GetAppointments, '/appointments') #get all bookings
 api.add_resource(GetUserAppointments, '/appointments/<string:user_id>')
 api.add_resource(BookSpecialist, '/bookappointment') # book specialist

@@ -1,0 +1,69 @@
+.container {
+  margin: 0;
+  margin-left: 36%;
+  width: 40%;
+}
+
+.login {
+  margin-top: 13%;
+  padding: 5%;
+  border-radius: 40px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.loginText {
+  font-weight: bold;
+  font-size: 30px;
+  padding: 7%;
+}
+
+.loginForm {
+  margin-left: 8%;
+}
+
+.loginForm label {
+  font-weight: bold;
+}
+
+.loginForm input {
+  width: 90%;
+  height: 38px;
+}
+
+.loginForm .LoginBtn {
+  background-color: #343b3b;
+  border-radius: 15px;
+  color: #c4c0c0;
+  font-weight: bold;
+  font-size: 17.5px;
+  border: none;
+  height: 50px;
+}
+
+.loginForm .LoginBtn:hover {
+  background-color: #c4c0c0;
+  color: #343b3b;
+  border: none;
+  cursor: pointer;
+}
+
+.loginForm .login-error {
+  background-color: #f05353;
+  width: 90%;
+  border-radius: 7px;
+  text-align: center;
+}
+
+.loginForm .login-error p {
+  padding: 3%;
+}
+
+.loginForm .help-block {
+  font-size: 13.5px;
+}
+
+.loginForm .ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+/*# sourceMappingURL=login.component.css.map */

@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="col-md-8 login">
+    <span class="registerText">Sign Up</span><br /><br />
+    <form
+      action=""
+      class="registerForm"
+      (ngSubmit)="Register(registerForm)"
+      #registerForm="ngForm"
+    >
+      <label>Name</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        ngModel
+        required
+        #name="ngModel"
+      />
+      <span class="help-block" *ngIf="!name.valid && name.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Middle name</label><br />
+      <input type="text" class="form-control" name="middlename" ngModel />
+
+      <label>Surname</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="surname"
+        ngModel
+        required
+        #surname="ngModel"
+      />
+      <span class="help-block" *ngIf="!surname.valid && surname.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Contact</label><br />
+      <input
+        type="tel"
+        class="form-control"
+        name="contact"
+        ngModel
+        required
+        #contact="ngModel"
+      />
+      <span class="help-block" *ngIf="!contact.valid && contact.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Date of birth</label><br />
+      <input
+        type="date"
+        class="form-control"
+        name="dob"
+        ngModel
+        required
+        #dob="ngModel"
+      />
+      <span class="help-block" *ngIf="!dob.valid && dob.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Identity number</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="idnumber"
+        ngModel
+        required
+        #idnumber="ngModel"
+      />
+      <span class="help-block" *ngIf="!idnumber.valid && idnumber.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Gender</label><br />
+      <select name="gender" id="gender" class="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option></select
+      ><br /><br />
+
+      <label>Email</label><br />
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        ngModel
+        required
+        #email="ngModel"
+        email
+      />
+      <span class="help-block" *ngIf="!email.valid && email.touched"
+        >Required field!</span
+      >
+      <br />
+
+      <label>Password</label><br />
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        ngModel
+        required
+        #password="ngModel"
+      />
+      <span class="help-block" *ngIf="!password.valid && password.touched"
+        >Please enter a password!</span
+      >
+      <br />
+
+      <div *ngIf="registerMonitor" class="login-error">
+        <p>{{ registerErrorMessage }}</p>
+      </div>
+
+      <input
+        class="LoginBtn"
+        type="submit"
+        value="Sign up"
+        [disabled]="!registerForm.valid"
+      /><br /><br />
+
+      <p style="float: right; margin-right: 10.5%;">Already have account? <span>&nbsp;<a href="" class="signup">Sign in</a></span></p><br />
+      
+    </form>
+  </div>
+</div>

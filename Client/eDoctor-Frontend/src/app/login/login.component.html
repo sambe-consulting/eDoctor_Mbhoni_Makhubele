@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="col-md-8 login">
+    <span class="loginText">Login</span><br /><br />
+    <form
+      action=""
+      class="loginForm"
+      (ngSubmit)="login(loginForm)"
+      #loginForm="ngForm"
+    >
+      <label>Username</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        ngModel
+        required
+        email
+        #email="ngModel"
+      />
+      <span class="help-block" *ngIf="!email.valid && email.touched"
+        >Please enter a valid email!</span
+      ><br />
+      <label>Password</label><br />
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        ngModel
+        required
+        #password="ngModel"
+      />
+      <span class="help-block" *ngIf="!password.valid && password.touched"
+        >Please enter a password!</span
+      >
+      <br />
+
+      <div *ngIf="loginMonitor" class="login-error">
+        <p>{{ loginErrorMessage }}</p>
+      </div>
+
+      <input
+        class="LoginBtn"
+        type="submit"
+        value="LOGIN"
+        [disabled]="!loginForm.valid"
+      /><br /><br />
+      <a href="">Forgot password?</a><br />
+      <a href="" class="signup">Sign up</a>
+    </form>
+  </div>
+</div>

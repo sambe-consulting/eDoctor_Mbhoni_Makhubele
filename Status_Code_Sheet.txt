@@ -36,4 +36,11 @@ NOT_APPROVED = 0
 APROVED = 1
 
 
+Login Response
+---------------------
+ACOUNT DOES NOT EXISTS = 0
+INCORRECT PASSWORD = 1
+
+
+
 

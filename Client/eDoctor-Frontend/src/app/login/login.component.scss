@@ -1,0 +1,71 @@
+.container {
+  margin: 0;
+  margin-left: 28%;
+  //background-color: brown;
+  width: 65%;
+}
+
+.login {
+  //background-color: brown;
+  margin-top: 13%;
+  padding: 5%;
+  border-radius: 40px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.loginText {
+  font-weight: bold;
+  font-size: 30px;
+  padding: 7%;
+}
+
+.loginForm {
+  margin-left: 8%;
+  label {
+    font-weight: bold;
+  }
+
+  input {
+    width: 90%;
+    height: 38px;
+  }
+
+  .LoginBtn {
+    //background-color: rgb(39, 39, 39);
+    background-color: #343b3b;
+    border-radius: 15px;
+    color: rgb(196, 192, 192);
+    font-weight: bold;
+    font-size: 17.5px;
+    border: none;
+    //border-color: #343b3b;
+    height: 50px;
+  }
+
+  .LoginBtn:hover {
+    background-color: rgb(196, 192, 192);
+    color: #343b3b;
+    border: none;
+    cursor: pointer;
+  }
+
+  .login-error {
+    background-color: rgb(240, 83, 83);
+    width: 90%;
+    border-radius: 7px;
+    text-align: center;
+
+    p {
+      padding: 3%;
+    }
+  }
+
+  .help-block {
+    font-size: 13.5px;
+  }
+
+  .ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+}
