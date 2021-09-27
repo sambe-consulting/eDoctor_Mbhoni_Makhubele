@@ -11,9 +11,12 @@ import { HttpClient } from '@angular/common/http';
 export class RegisterComponent implements OnInit {
   userData: any;
   login_url = 'http://localhost:5000/registeruser';
+  male = "male"
 
   registerMonitor = false;
   registerErrorMessage = '';
+
+  dropdown_Arr = ['Male', 'Female', 'Other']
 
   constructor(private _usersevice: UserService, private http: HttpClient) {}
 
@@ -28,10 +31,8 @@ export class RegisterComponent implements OnInit {
       Contact: form.value.contact,
       Email: form.value.email,
       Password: form.value.password,
-      // "DOB": form.value.bod,
-      DOB: '25/04/2002',
-      Gender: 'Male',
-      // "Gender": form.value.gender,
+      DOB: form.value.dob,
+      Gender: form.value.gender,
       Type: this._usersevice.getUserType(),
       Signup_Date: '12/06/2021', //This value is assigned on the server
       Rest_Code: 'AAAA',
@@ -40,6 +41,8 @@ export class RegisterComponent implements OnInit {
       Longitude: -12.4444,
       Latitude: 23.43947,
     };
+
+    console.log(this.userData);
 
     this.http.post(this.login_url, this.userData).subscribe((data: any) => {
       if (data['code'] == 0.1) {
