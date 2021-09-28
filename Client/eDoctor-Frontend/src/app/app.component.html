@@ -13,8 +13,10 @@
       <a class="nav-link" href="#">Appointments</a>
     </li>
 
-    <li class="nav-item" *ngIf="notLoggedin">
-      <a class="nav-link" href="#">Specialists</a>
+
+    <!-- add *ngif below: -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/specialists">Specialists</a>
     </li>
 
     <li class="nav-item" *ngIf="notLoggedin">
@@ -34,16 +36,10 @@
       <a class="nav-link" routerLink="/register">Register</a>
     </li>
 
+  
+
 
     </ul>
 </div>
 
 <router-outlet></router-outlet>
-
-<!-- <div class="col">
-  <app-register></app-register>
-  <app-login></app-login>
-  <app-home></app-home>
-  <router-outlet></router-outlet>
-  
-</div> -->
