@@ -382,7 +382,7 @@ class GetSectors(Resource):
         if(sectors):
             for sector in sectors:
                 _sector = { 
-                    "id": sector[0],   
+                    "ID_Number": sector[0],   
                     "Name": sector[1],
                     "Owner": sector[2],
                     "Website": sector[3],
@@ -444,7 +444,7 @@ class GetSector(Resource):
         sector = data.getHealthSector(query)
         if sector:
             _sector = {
-                "id": sector[0],
+                "ID_Number": sector[0],
                 "Name": sector[1],
                 "Owner": sector[2],
                 "Website": sector[3],

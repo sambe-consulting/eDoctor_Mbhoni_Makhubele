@@ -1,0 +1,40 @@
+body {
+  background: #F2F2F2;
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+.logo-link {
+  font-size: 35px;
+  font-weight: bold;
+  text-decoration: none !important;
+  border-color: #1c1cff;
+  border-style: solid;
+  padding: 11px;
+  border-radius: 35px;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none !important;
+  border-color: #817d7d;
+  border-style: solid;
+  padding: 5px;
+  border-radius: 35px;
+  margin-right: 50px;
+}
+
+.searchbox {
+  background-color: #3d3a3a;
+}
+
+.nav-item {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 50px;
+  margin-top: 10.5px;
+  position: static;
+  float: right;
+}
+/*# sourceMappingURL=header.component.css.map */

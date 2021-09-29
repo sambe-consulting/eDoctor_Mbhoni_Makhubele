@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserService } from '../user.service';
 import { HttpClient } from '@angular/common/http';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   dropdown_Arr = ['Male', 'Female', 'Other']
 
-  constructor(private _usersevice: UserService, private http: HttpClient) {}
+  constructor(private _usersevice: UsersService, private http: HttpClient) {}
 
   ngOnInit(): void {}
 

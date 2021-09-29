@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
-import { UserService } from './user.service';
+import { Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,20 +7,12 @@ import { UserService } from './user.service';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   title = 'eDoctor';
-  notLoggedin = false;
-  constructor(private _userservice: UserService) {}
+
+  constructor() {}
 
   ngOnInit() {
-    //this.notLoggedin = this._userservice.getLogginStatus()
-    console.log("On init")
+   
   }
-
-  ngOnChanges(){
-    // this.notLoggedin = this._userservice.getLogginStatus();
-    console.log("On changes")
-  }
-
-
 }

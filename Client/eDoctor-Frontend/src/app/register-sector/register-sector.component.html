@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="col-md-8 login">
+    <span class="registerText">Sector Registration</span><br /><br />
+    <form
+      action=""
+      class="registerForm"
+      (ngSubmit)="Register(registerForm)"
+      #registerForm="ngForm"
+    >
+      <label>Name</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        ngModel
+        required
+        #name="ngModel"
+      />
+      <span class="help-block" *ngIf="!name.valid && name.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Owner</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="owner"
+        ngModel
+        required
+        #owner="ngModel"
+      />
+
+      <label>Website</label><br />
+      <input
+        type="url"
+        class="form-control"
+        name="website"
+        ngModel
+        required
+        #website="ngModel"
+      />
+      <span class="help-block" *ngIf="!website.valid && website.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Address</label><br />
+      <input
+        type="tel"
+        class="form-control"
+        name="contact"
+        ngModel
+        required
+        #addresss="ngModel"
+      />
+      <span class="help-block" *ngIf="!addresss.valid && addresss.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Geolocation</label><br /><br />
+
+      <label>Date found</label><br />
+      <input
+        type="date"
+        class="form-control"
+        name="founded"
+        ngModel
+        required
+        #founded="ngModel"
+      />
+      <span class="help-block" *ngIf="!founded.valid && founded.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Business hours</label><br />
+      <span>Opening Time:</span>
+      <input
+        type="time"
+        class="form-control"
+        name="openTime"
+        ngModel
+        required
+        #openTime="ngModel"
+      />
+      <span class="help-block" *ngIf="!openTime.valid && openTime.touched"
+        >Required field!</span
+      ><br />
+     <span>Closing Time:</span>
+      <input
+        type="time"
+        class="form-control"
+        name="closeTime"
+        ngModel
+        required
+        #closeTime="ngModel"
+      />
+      <span class="help-block" *ngIf="!closeTime.valid && closeTime.touched"
+        >Required field!</span
+      ><br />
+
+      <label>Description</label><br />
+      <textarea ngModel class="form-control" name="Description" required #desc="ngModel">
+      </textarea>
+      <span class="help-block" *ngIf="!desc.valid && desc.touched"
+        >Required field!</span
+      ><br />
+
+
+      <label>Contact</label><br />
+      <input
+        type="tel"
+        class="form-control"
+        name="contact"
+        ngModel
+        required
+        #contact="ngModel"
+        email
+      />
+      <span class="help-block" *ngIf="!contact.valid && contact.touched"
+        >Required field!</span
+      >
+
+
+      <label>Email</label><br />
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        ngModel
+        required
+        #email="ngModel"
+        email
+      />
+      <span class="help-block" *ngIf="!email.valid && email.touched"
+        >Required field!</span
+      >
+      <br />
+
+      <label>Password</label><br />
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        ngModel
+        required
+        #password="ngModel"
+      />
+      <span class="help-block" *ngIf="!password.valid && password.touched"
+        >Please enter a password!</span
+      >
+      <br />
+
+      <!-- <div *ngIf="registerMonitor" class="login-error">
+        <p>{{ registerErrorMessage }}</p>
+      </div> -->
+
+      <input
+        class="LoginBtn"
+        type="submit"
+        value="Register"
+        [disabled]="!registerForm.valid"
+      /><br /><br />
+
+      <p style="float: right; margin-right: 10.5%">
+        Already have sector registered?
+        <span>&nbsp;<a routerLink="/login" class="signup">Sign in</a></span>
+      </p>
+      <br />
+    </form>
+  </div>
+</div>
