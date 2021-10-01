@@ -32,16 +32,16 @@ import { RegisterSectorComponent } from './register-sector/register-sector.compo
     AppointmentsComponent,
     DiagnosisComponent,
     PricingComponent,
-    RegisterSectorComponent
+    RegisterSectorComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

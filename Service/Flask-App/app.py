@@ -9,13 +9,9 @@ from flask import jsonify
 from models.users.admin import Admin
 from models.users.patient import Patient
 from models.users.specialist import Specialist
-
 from database.database import Database
 from models.sector import Sector
 from flask_cors import CORS
-
-
-
 
 app = Flask(__name__)
 CORS(app)
@@ -40,21 +36,43 @@ class Login(Resource):
         json_data = request.get_json(force=False)
         username = json_data['username']
         password = json_data['password']
+        
+        itsSector = False
 
+        user = None
         query = "SELECT * FROM User LEFT JOIN Patient ON User.ID_Number = Patient.ID_Number "\
                                    "LEFT JOIN Admin ON User.ID_Number = Admin.ID_Number "\
                                    "LEFT JOIN Specialist ON User.ID_Number = Specialist.ID_Number "\
                                    "WHERE User.Email = '" + (username) + "'"
+
         user = data.getUser(query)
 
-        if user:
-            if user[6] == password:
-                _user = GetUser.get(self, user[0])
-                return _user
+
+        if(user == None):
+            print("I am in")
+            query = "SELECT * FROM Health_Sector WHERE Email='" + (username) + "'"
+            user = data.getHealthSector(query)
+            itsSector = True
+
+
+        if (itsSector):
+            if user:
+                if user[16] == password:
+                    _sector = GetSector.get(self,user[0])
+                    return _sector
+                else:
+                    return 1
             else:
-                return 1
+                return None
         else:
-            return None
+            if user:
+                if user[6] == password:
+                    _user = GetUser.get(self, user[0])
+                    return _user
+                else:
+                    return 1
+            else:
+                return None
 
 
         
@@ -248,7 +266,7 @@ class GetUser(Resource):
                 user['HealthSectorID'] = _user[21]
 
             response.append(user)
-            return response
+            return response[0]
         else:
             return _user
 
@@ -314,7 +332,7 @@ class RegisterSector(Resource):
         
         if SectorExists:
             return {
-                "code": 1,
+                "code": 0,
                 "message": "Email already exists"
             }
         else:

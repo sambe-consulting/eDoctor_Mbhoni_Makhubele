@@ -10,6 +10,7 @@ import { UsersService } from '../users.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   loggedIn = false;
+  type = -1;
 
   constructor(private _userservice: UsersService) {}
 
@@ -21,6 +22,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.log(this.loggedIn)
       )
     );
+
+    this._userservice.userType_Cast.subscribe((type) => {
+      (this.type = type), console.log('user Type:' + this.type.toString());
+    });
   }
 
   ngOnDestroy() {}

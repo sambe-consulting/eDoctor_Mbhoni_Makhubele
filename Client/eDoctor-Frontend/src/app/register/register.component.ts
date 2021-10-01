@@ -11,12 +11,13 @@ import { UsersService } from '../users.service';
 export class RegisterComponent implements OnInit {
   userData: any;
   login_url = 'http://localhost:5000/registeruser';
-  male = "male"
+  male = 'male';
 
   registerMonitor = false;
   registerErrorMessage = '';
+  specialist = false;
 
-  dropdown_Arr = ['Male', 'Female', 'Other']
+  dropdown_Arr = ['Male', 'Female', 'Other'];
 
   constructor(private _usersevice: UsersService, private http: HttpClient) {}
 

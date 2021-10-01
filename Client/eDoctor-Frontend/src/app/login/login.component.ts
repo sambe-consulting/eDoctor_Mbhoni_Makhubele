@@ -62,11 +62,14 @@ export class LoginComponent implements OnInit {
         this.loginErrorMessage = 'A user with this email does not exist';
       } else {
         this.loginMonitor = false;
-        this.id = data[0]['ID_Number'];
+        this.id = data['ID_Number'];
         if (this.id.length != 13) {
           this._userservice.updateSectorID(this.id);
+          console.log('Its sector');
+          this._userservice.updateUserType(3);
         } else {
-          this._userservice.updateUserType(data[0]['Type']);
+          this._userservice.updateUserType(data['Type']);
+          console.log('Its user');
         }
         console.log(this.id.length);
         console.log(this.userType);

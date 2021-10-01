@@ -42,6 +42,13 @@
     height: 50px;
   }
 
+  .LoginBtn:hover {
+    background-color: rgb(196, 192, 192);
+    color: #343b3b;
+    border: none;
+    cursor: pointer;
+  }
+
   .login-error {
     background-color: rgb(240, 83, 83);
     width: 90%;

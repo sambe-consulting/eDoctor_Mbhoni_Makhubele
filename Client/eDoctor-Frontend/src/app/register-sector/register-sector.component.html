@@ -47,12 +47,12 @@
       <input
         type="tel"
         class="form-control"
-        name="contact"
+        name="address"
         ngModel
         required
-        #addresss="ngModel"
+        #address="ngModel"
       />
-      <span class="help-block" *ngIf="!addresss.valid && addresss.touched"
+      <span class="help-block" *ngIf="!address.valid && address.touched"
         >Required field!</span
       ><br />
 
@@ -84,7 +84,7 @@
       <span class="help-block" *ngIf="!openTime.valid && openTime.touched"
         >Required field!</span
       ><br />
-     <span>Closing Time:</span>
+      <span>Closing Time:</span>
       <input
         type="time"
         class="form-control"
@@ -98,12 +98,17 @@
       ><br />
 
       <label>Description</label><br />
-      <textarea ngModel class="form-control" name="Description" required #desc="ngModel">
+      <textarea
+        ngModel
+        class="form-control"
+        name="Description"
+        required
+        #desc="ngModel"
+      >
       </textarea>
       <span class="help-block" *ngIf="!desc.valid && desc.touched"
         >Required field!</span
       ><br />
-
 
       <label>Contact</label><br />
       <input
@@ -118,7 +123,7 @@
       <span class="help-block" *ngIf="!contact.valid && contact.touched"
         >Required field!</span
       >
-
+      <br />
 
       <label>Email</label><br />
       <input
@@ -149,17 +154,18 @@
       >
       <br />
 
-      <!-- <div *ngIf="registerMonitor" class="login-error">
+      <div *ngIf="registerMonitor" class="login-error">
         <p>{{ registerErrorMessage }}</p>
-      </div> -->
+      </div>
 
       <input
         class="LoginBtn"
         type="submit"
         value="Register"
-        [disabled]="!registerForm.valid"
+
       /><br /><br />
 
+      <!-- [disabled]="!registerForm.valid" -->
       <p style="float: right; margin-right: 10.5%">
         Already have sector registered?
         <span>&nbsp;<a routerLink="/login" class="signup">Sign in</a></span>

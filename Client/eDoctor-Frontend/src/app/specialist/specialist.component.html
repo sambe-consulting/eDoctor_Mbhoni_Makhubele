@@ -16,14 +16,24 @@
 </div> -->
 
 <div class="container">
-  <div class="col-md-8" style=" margin-top: 3%; margin-left: 16%;">
+  <div class="col-md-8" style="margin-top: 3%; margin-left: 16%">
     <div class="links">
-        <a class="">Add Specialist</a>
-        <a class="">Add Specialist</a>
+      <a class="" routerLink="/register" *ngIf="userType === 3"
+        >Specialist Registration</a
+      >
     </div>
-    
+    <br />
 
-    <br>
-    
+    <form
+      *ngIf="userType === 1"
+      class="example"
+      action="/action_page.php"
+      style="margin: auto; max-width: 80%"
+    >
+      <input type="text" placeholder="Search.." name="search2" />
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+    <br />
   </div>
 </div>

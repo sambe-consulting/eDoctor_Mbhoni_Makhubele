@@ -76,11 +76,18 @@
       ><br />
 
       <label>Gender</label><br />
-      <select name="gender" id="gender" class="form-control gender" ngModel required>
+      <select
+        name="gender"
+        id="gender"
+        class="form-control gender"
+        ngModel
+        required
+      >
         <option value="male">Male</option>
         <option value="female">Female</option>
-        <option value="other">Other</option></select>
-  
+        <option value="other">Other</option>
+      </select>
+
       <br /><br />
 
       <label>Email</label><br />
@@ -123,8 +130,11 @@
         [disabled]="!registerForm.valid"
       /><br /><br />
 
-      <p style="float: right; margin-right: 10.5%;">Already have account? <span>&nbsp;<a routerLink='/login' class="signup">Sign in</a></span></p><br />
-      
+      <p style="float: right; margin-right: 10.5%">
+        Already have account?
+        <span>&nbsp;<a routerLink="/login" class="signup">Sign in</a></span>
+      </p>
+      <br />
     </form>
   </div>
 </div>
