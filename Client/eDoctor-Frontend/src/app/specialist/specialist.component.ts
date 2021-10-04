@@ -9,10 +9,13 @@ import { UsersService } from '../users.service';
 export class SpecialistComponent implements OnInit {
   userType = 1;
 
-
   constructor(private _userservice: UsersService) {}
 
   ngOnInit(): void {
     this._userservice.userType_Cast.subscribe((type) => (this.userType = type));
+  }
+
+  RegisterSpecialist() {
+    this._userservice.updateUserTypeRegistration_Update(2);
   }
 }

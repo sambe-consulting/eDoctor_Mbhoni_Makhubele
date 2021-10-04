@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
+import { ModelsService } from '../models/models.service';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private _userservice: UsersService,
-    private route: Router
+    private route: Router,
+    private _modelsService: ModelsService
   ) {}
 
   ngOnInit() {
@@ -66,9 +68,12 @@ export class LoginComponent implements OnInit {
         if (this.id.length != 13) {
           this._userservice.updateSectorID(this.id);
           console.log('Its sector');
+          this._modelsService.SectorLogingIn(data)
+          this._userservice.updateSectorID(data['ID_Number']);
           this._userservice.updateUserType(3);
         } else {
           this._userservice.updateUserType(data['Type']);
+          this._modelsService.UserloggingIn(data);
           console.log('Its user');
         }
         console.log(this.id.length);

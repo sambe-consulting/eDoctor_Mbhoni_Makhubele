@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from '../users.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,32 +18,79 @@ export class RegisterComponent implements OnInit {
   registerMonitor = false;
   registerErrorMessage = '';
   specialist = false;
+  userType = 0;
+
+  registration_Monitor = 0;
+  sectorID = '';
 
   dropdown_Arr = ['Male', 'Female', 'Other'];
 
-  constructor(private _usersevice: UsersService, private http: HttpClient) {}
+  constructor(
+    private _usersevice: UsersService,
+    private http: HttpClient,
+    private route: Router
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this._usersevice.user_Type_Registration_Cast.subscribe((type) => {
+      console.log('Mbhoni:' + type);
+    });
+  }
 
   Register(form: NgForm) {
-    this.userData = {
-      ID_Number: form.value.idnumber,
-      Name: form.value.name,
-      Middle_Name: form.value.middlename,
-      Surname: form.value.surname,
-      Contact: form.value.contact,
-      Email: form.value.email,
-      Password: form.value.password,
-      DOB: form.value.dob,
-      Gender: form.value.gender,
-      Type: this._usersevice.getUserType(),
-      Signup_Date: '12/06/2021', //This value is assigned on the server
-      Rest_Code: 'AAAA',
+    this._usersevice.user_Type_Registration_Cast.subscribe((type) => {
+      this.registration_Monitor = type;
+    });
 
-      //Hard coded values for location
-      Longitude: -12.4444,
-      Latitude: 23.43947,
-    };
+    this._usersevice.userType_Cast.subscribe((type) => {
+      this.userType = type;
+    });
+
+    if (this.registration_Monitor == 0) {
+      console.log('Patient Registration');
+      this.userData = {
+        ID_Number: form.value.idnumber,
+        Name: form.value.name,
+        Middle_Name: form.value.middlename,
+        Surname: form.value.surname,
+        Contact: form.value.contact,
+        Email: form.value.email,
+        Password: form.value.password,
+        DOB: form.value.dob,
+        Gender: form.value.gender,
+        Type: this.userType,
+        Signup_Date: '12/06/2021', //This value is assigned on the server
+        Rest_Code: 'AAAA',
+
+        //Hard coded values for location
+        Longitude: -12.4444,
+        Latitude: 23.43947,
+      };
+    } else if (this.registration_Monitor == 2) {
+      console.log('Specialist Registration');
+
+      this._usersevice.sector_id_cast.subscribe((id) => {
+        this.sectorID = id;
+      });
+
+      this.userData = {
+        ID_Number: form.value.idnumber,
+        Name: form.value.name,
+        Middle_Name: form.value.middlename,
+        Surname: form.value.surname,
+        Contact: form.value.contact,
+        Email: form.value.email,
+        Password: form.value.password,
+        DOB: form.value.dob,
+        Gender: form.value.gender,
+        Type: this.registration_Monitor,
+        Signup_Date: '12/06/2021', //This value is assigned on the server
+        Rest_Code: 'AAAA',
+        YearsExperience: '0',
+        AccountStatus: '1',
+        HealthSectorID: this.sectorID.toString(),
+      };
+    }
 
     console.log(this.userData);
 
@@ -61,6 +110,7 @@ export class RegisterComponent implements OnInit {
       } else {
         this.registerMonitor = false;
         console.log(data);
+        this.route.navigate(['/login']);
       }
     });
 

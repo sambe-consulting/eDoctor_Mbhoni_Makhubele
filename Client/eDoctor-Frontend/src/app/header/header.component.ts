@@ -28,5 +28,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  logout() {
+    this._userservice.updateLoginStatus(false);
+  }
+
+  profile(){
+    
+  }
+
   ngOnDestroy() {}
 }

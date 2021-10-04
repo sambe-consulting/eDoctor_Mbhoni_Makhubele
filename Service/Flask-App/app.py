@@ -482,7 +482,7 @@ class GetSector(Resource):
             }
             return _sector
         else:
-            return sector
+            return None
 
 
 
@@ -495,7 +495,7 @@ class GetSectorSpecialists(Resource):
         for user in users:
             if user["Type"] == (2):
                 if user["HealthSectorID"] == sector_id:
-                    response.append(GetUser().get(user['ID_Number'])[0])
+                    response.append(GetUser().get(user['ID_Number']))
 
         if response == []:
             return None
@@ -507,7 +507,7 @@ class GetSpecialists(Resource):
         response = []
         for user in users:
             if user["Type"] == (2):
-                response.append(GetUser().get(user['ID_Number'])[0])
+                response.append(GetUser().get(user['ID_Number']))
 
         if response == []:
             return None
@@ -519,7 +519,7 @@ class GetActiveSpecialists(Resource):
         response = []
         for user in users:
             if user["Type"] == (2) and user["AccountStatus"] == (1) and user["HealthSectorID"] == sector_id:
-                response.append(GetUser().get(user['ID_Number'])[0])
+                response.append(GetUser().get(user['ID_Number']))
 
         if response == []:
             return None

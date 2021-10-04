@@ -1,5 +1,5 @@
 <!-- <div class="container">
-  <div class="col-md-10" style="background-color: blue;">  
+  <div class="col-md-10" style="background-color: blue;">
     <div class="links">
       <ul style="list-style-type: none;">
         <li class="nav-item">
@@ -10,7 +10,7 @@
           <a class="nav-link">Add Specialist</a>
         </li>
       </ul>
-      
+
     </div>
   </div>
 </div> -->
@@ -18,7 +18,12 @@
 <div class="container">
   <div class="col-md-8" style="margin-top: 3%; margin-left: 16%">
     <div class="links">
-      <a class="" routerLink="/register" *ngIf="userType === 3"
+      <a
+        class=""
+        (click)="RegisterSpecialist()"
+        ngModel
+        routerLink="/register"
+        *ngIf="userType === 3"
         >Specialist Registration</a
       >
     </div>
@@ -35,5 +40,10 @@
     </form>
 
     <br />
+
+
+    <div class="specialist-view-sector">
+
+    </div>
   </div>
 </div>
