@@ -70,4 +70,31 @@
 .registerForm .gender {
   width: 89%;
 }
-/*# sourceMappingURL=register.component.css.map */
+
+.password-update {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.password-update input {
+  width: 70%;
+}
+
+.changepassword {
+  width: 60%;
+  background-color: #343b3b;
+  border-radius: 15px;
+  color: #c4c0c0;
+  font-weight: bold;
+  font-size: 17.5px;
+  border-color: #343b3b;
+  height: 50px;
+}
+
+.changepassword:hover {
+  background-color: #c4c0c0;
+  color: #343b3b;
+  border: none;
+  cursor: pointer;
+}
+/*# sourceMappingURL=user-profile.component.css.map */

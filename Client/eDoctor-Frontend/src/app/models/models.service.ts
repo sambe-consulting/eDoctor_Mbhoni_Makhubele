@@ -26,6 +26,8 @@ export class ModelsService {
       data['Signup_Date'],
       data['Reset_Code']
     );
+
+    console.log(this.patient.DOB)
   }
 
   getUser() {

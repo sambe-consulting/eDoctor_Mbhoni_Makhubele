@@ -3,6 +3,7 @@ import { User } from './user';
 export class Patient extends User {
   longitude = -12.434344;
   tatitude = 17.43454;
+
   constructor(
     Id: string,
     name: string,

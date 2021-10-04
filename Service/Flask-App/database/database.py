@@ -20,6 +20,20 @@ class Database():
         self.connection.close()
         return rows
 
+    def User_update_password(self, query: str):
+        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.connection.close()
+
+    def updateUser(self, query: str):
+        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.connection.close()
+
 
     def getUser(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
@@ -29,13 +43,6 @@ class Database():
         self.connection.commit()
         self.connection.close()
         return row
-
-    def updateUser(self, query: str):
-        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
-        self.cursor = self.connection.cursor()
-        self.cursor.execute(query)
-        self.connection.commit()
-        self.connection.close()
     
 
     def RegisterUser(self, query: str):

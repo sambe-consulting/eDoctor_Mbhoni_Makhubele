@@ -12,17 +12,19 @@ import { RegisterSectorComponent } from './register-sector/register-sector.compo
 import { RegisterComponent } from './register/register.component';
 import { SectorComponent } from './sector/sector.component';
 import { SpecialistComponent } from './specialist/specialist.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent},
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'specialists', component: SpecialistComponent },
   { path: 'sector', component: SectorComponent },
   { path: 'appointments', component: AppointmentsComponent },
-  {path: 'diagnosis', component: DiagnosisComponent},
-  {path: 'pricing', component: PricingComponent},
-  {path: 'registersector', component: RegisterSectorComponent},
+  { path: 'diagnosis', component: DiagnosisComponent },
+  { path: 'pricing', component: PricingComponent },
+  { path: 'registersector', component: RegisterSectorComponent },
+  { path: 'updateuser', component: UserProfileComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -42,5 +44,6 @@ export const routingComponents = [
   AppointmentsComponent,
   DiagnosisComponent,
   PricingComponent,
-  RegisterSectorComponent
+  RegisterSectorComponent,
+  UserProfileComponent
 ];

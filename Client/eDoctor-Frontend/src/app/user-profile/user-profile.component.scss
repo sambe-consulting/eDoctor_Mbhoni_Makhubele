@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0;
+  margin-left: 23%;
+  //background-color: brown;
+  width: 100%;
+}
+
+.login {
+  //background-color: brown;
+  margin-top: 5%;
+  padding: 5%;
+  border-radius: 40px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.registerText {
+  font-weight: bold;
+  font-size: 30px;
+  padding: 7%;
+}
+
+.registerForm {
+  margin-left: 8%;
+  label {
+    font-weight: bold;
+  }
+
+  input {
+    width: 90%;
+    height: 38px;
+  }
+
+  .LoginBtn {
+    //background-color: rgb(39, 39, 39);
+    background-color: #343b3b;
+    border-radius: 15px;
+    color: rgb(196, 192, 192);
+    font-weight: bold;
+    font-size: 17.5px;
+    border-color: #343b3b;
+    height: 50px;
+  }
+
+  .LoginBtn:hover {
+    background-color: rgb(196, 192, 192);
+    color: #343b3b;
+    border: none;
+    cursor: pointer;
+  }
+
+  .help-block {
+    font-size: 13.5px;
+  }
+
+  .ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  .gender {
+    width: 89%;
+  }
+}
+
+.password-update {
+  form {
+    margin-left: 24%;
+  }
+  padding: 2%;
+
+  margin-top: 20px;
+  input {
+    width: 70%;
+    text-align: center;
+  }
+}
+
+.changepassword {
+  //background-color: rgb(39, 39, 39);
+  width: 60%;
+  background-color: #343b3b;
+  border-radius: 15px;
+  color: rgb(196, 192, 192);
+  font-weight: bold;
+  font-size: 17.5px;
+  border-color: #343b3b;
+  height: 50px;
+}
+
+.changepassword:hover {
+  background-color: rgb(196, 192, 192);
+  color: #343b3b;
+  border: none;
+  cursor: pointer;
+}
+
+.column {
+  float: left;
+  width: 550px;
+}
+
+.row {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.success-password-update {
+  background-color: #42ba96;
+  width: 70%;
+  border-radius: 7px;
+  text-align: center;
+
+  p {
+    padding: 3%;
+  }
+}
+
+.error-password-update {
+  background-color: rgb(240, 83, 83);
+  width: 70%;
+  border-radius: 7px;
+  text-align: center;
+
+  p {
+    padding: 3%;
+  }
+}

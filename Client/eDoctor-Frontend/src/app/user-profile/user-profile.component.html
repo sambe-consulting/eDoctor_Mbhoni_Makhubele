@@ -1,0 +1,185 @@
+<div class="container">
+  <div class="row">
+    <div class="column">
+      <div class="col-md-12 login">
+        <span class="registerText">Profile</span><br /><br />
+        <form
+          action=""
+          class="registerForm"
+          (ngSubmit)="updateUser(registerForm)"
+          #registerForm="ngForm"
+        >
+          <label>Name</label><br />
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="Name"
+            ngModel
+            required
+            #name="ngModel"
+          />
+          <span class="help-block" *ngIf="!name.valid && name.touched"
+            >Required field!</span
+          ><br />
+
+          <label>Middle name</label><br />
+          <input
+            type="text"
+            class="form-control"
+            name="middlename"
+            [(ngModel)]="M_Name"
+            ngModel
+          /><br />
+
+          <label>Surname</label><br />
+          <input
+            type="text"
+            class="form-control"
+            name="surname"
+            [(ngModel)]="Surname"
+            ngModel
+            required
+            #surname="ngModel"
+          />
+          <span class="help-block" *ngIf="!surname.valid && surname.touched"
+            >Required field!</span
+          ><br />
+
+          <label>Contact</label><br />
+          <input
+            type="tel"
+            class="form-control"
+            name="contact"
+            ngModel
+            required
+            [(ngModel)]="Contact"
+            #contact="ngModel"
+          />
+          <span class="help-block" *ngIf="!contact.valid && contact.touched"
+            >Required field!</span
+          ><br />
+
+          <label>Date of birth</label><br />
+          <input
+            type="text"
+            class="form-control"
+            name="dob"
+            ngModel
+            required
+            [disabled]="true"
+            [(ngModel)]="DOB"
+            #dob="ngModel"
+          />
+          <span class="help-block" *ngIf="!dob.valid && dob.touched"
+            >Required field!</span
+          ><br />
+
+          <label>Identity number</label><br />
+          <input
+            type="text"
+            class="form-control"
+            name="idnumber"
+            ngModel
+            [(ngModel)]="ID_Number"
+            required
+            [disabled]="true"
+            #idnumber="ngModel"
+          />
+          <span class="help-block" *ngIf="!idnumber.valid && idnumber.touched"
+            >Required field!</span
+          ><br />
+
+          <label>Gender</label><br />
+          <input
+            name="gender"
+            id="gender"
+            [(ngModel)]="Gender"
+            class="form-control gender"
+            [disabled]="true"
+            ngModel
+            required
+          />
+
+          <br />
+
+          <label>Email</label><br />
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            ngModel
+            required
+            [(ngModel)]="Email"
+            #email="ngModel"
+            email
+          />
+          <span class="help-block" *ngIf="!email.valid && email.touched"
+            >Required field!</span
+          ><br />
+
+          <!-- <div *ngIf="registerMonitor" class="login-error">
+        <p>{{ registerErrorMessage }}</p>
+      </div> -->
+
+          <input
+            class="LoginBtn"
+            type="submit"
+            value="Update"
+            [disabled]="!registerForm.valid"
+          />
+
+          <br />
+        </form>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="col-md-12 password-update">
+        <form action="" (ngSubmit)="updatePass(passForm)" #passForm="ngForm">
+          <input
+            type="password"
+            class="form-control"
+            ngModel
+            required
+            placeholder="Old password"
+            name="oldpassword"
+          /><br />
+          <input
+            type="password"
+            class="form-control"
+            ngModel
+            required
+            placeholder="New password"
+            name="newpassword"
+          /><br />
+          <input
+            type="password"
+            class="form-control"
+            ngModel
+            required
+            placeholder="Confirm password"
+            name="confirmpassword"
+          /><br />
+
+          <div *ngIf="!correctPassword" class="error-password-update">
+            <p>{{ ErrorMessage }}</p>
+          </div>
+
+          <div *ngIf="incorrectPassword" class="success-password-update">
+            <p>{{ ErrorMessage }}</p>
+          </div>
+
+          <input
+            class="changepassword"
+            type="submit"
+            value="Change Password"
+            [disabled]="!passForm.valid"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <br /><br /><br />
+</div>

@@ -17,6 +17,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { RegisterSectorComponent } from './register-sector/register-sector.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RegisterSectorComponent } from './register-sector/register-sector.compo
     DiagnosisComponent,
     PricingComponent,
     RegisterSectorComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

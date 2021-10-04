@@ -222,7 +222,40 @@ class Register(Resource):
                 "code": 1,
                 "message": "user registered successfully"
             } # User registered successfully
-                                          
+
+
+class UpdatePassword(Resource):
+    def put(self):
+        data = Database()
+        json_data = request.get_json(force=False)
+        user_ID = json_data["ID_Number"]
+        new_password = json_data["Password"] 
+        query = "UPDATE User SET Password='" + new_password + "' WHERE ID_Number='" + user_ID + "';"
+        data.User_update_password(query)
+        return 1
+
+
+class UpdateUser(Resource): #Name. Middle name, Surname, contact, email
+    def put(self):
+        data = Database()
+        json_data = request.get_json(force=False)
+        user_ID = json_data["ID_Number"]
+        name = json_data["Name"]
+        m_name = json_data["M_Name"]
+        surname = json_data["Surname"]
+        contact = json_data["Contact"]
+        email = json_data["Email"]
+
+        query = "UPDATE User SET Name='" + name + "',"\
+                                "M_Name='" + m_name + "',"\
+                                "Surname='" + surname + "',"\
+                                "Contact='" + contact + "',"\
+                                "Email='" + email + "' WHERE ID_Number='" + user_ID + "';"
+        
+        data.updateUser(query)
+        return 1
+
+
 
 
 class GetUser(Resource):
@@ -639,6 +672,8 @@ class BookingResponse(Resource):
 
 api.add_resource(hello,'/')
 api.add_resource(Login,'/login')
+api.add_resource(UpdatePassword, '/updatepassword')
+api.add_resource(UpdateUser, '/updateuser')
 api.add_resource(GetAppointments, '/appointments') #get all bookings
 api.add_resource(GetUserAppointments, '/appointments/<string:user_id>')
 api.add_resource(BookSpecialist, '/bookappointment') # book specialist
