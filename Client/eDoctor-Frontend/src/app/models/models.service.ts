@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { __values } from 'tslib';
 import { Sector } from './sector';
 import { Patient } from './users/patient';
 
@@ -9,9 +11,13 @@ export class ModelsService {
   patient: Patient | undefined;
   sector: Sector | undefined;
 
+  private patien = new BehaviorSubject<Object>(__values);
+  patien_cast = this.patien.asObservable();
+
   constructor() {}
 
-  UserloggingIn(data: any) {
+  updatePatient(data: any) {
+    this.patien.next(data);
     this.patient = new Patient(
       data['ID_Number'],
       data['Name'],
@@ -26,9 +32,24 @@ export class ModelsService {
       data['Signup_Date'],
       data['Reset_Code']
     );
-
-    console.log(this.patient.DOB)
   }
+
+  // UserloggingIn(data: any) {
+  //   this.patient = new Patient(
+  //     data['ID_Number'],
+  //     data['Name'],
+  //     data['Middle_Name'],
+  //     data['Surname'],
+  //     data['Contact'],
+  //     data['Email'],
+  //     data['Password'],
+  //     data['DOB'],
+  //     data['Gender'],
+  //     data['Type'],
+  //     data['Signup_Date'],
+  //     data['Reset_Code']
+  //   );
+  // }
 
   getUser() {
     return this.patient;

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
+import { ModelsService } from '../models/models.service';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -12,7 +13,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedIn = false;
   type = -1;
 
-  constructor(private _userservice: UsersService) {}
+  name = '';
+
+  constructor(
+    private _userservice: UsersService,
+    private _modelsService: ModelsService
+  ) {}
 
   ngOnInit() {
     this._userservice.cast.subscribe(
@@ -26,15 +32,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this._userservice.userType_Cast.subscribe((type) => {
       (this.type = type), console.log('user Type:' + this.type.toString());
     });
+
+    this._modelsService.patien_cast.subscribe((data: any) => {
+      this.name = data["Name"];
+    });
   }
 
   logout() {
     this._userservice.updateLoginStatus(false);
   }
 
-  profile(){
-    
-  }
+  profile() {}
 
   ngOnDestroy() {}
 }

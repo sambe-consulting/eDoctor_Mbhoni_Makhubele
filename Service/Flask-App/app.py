@@ -253,7 +253,8 @@ class UpdateUser(Resource): #Name. Middle name, Surname, contact, email
                                 "Email='" + email + "' WHERE ID_Number='" + user_ID + "';"
         
         data.updateUser(query)
-        return 1
+
+        return GetUser.get(self,user_ID)
 
 
 

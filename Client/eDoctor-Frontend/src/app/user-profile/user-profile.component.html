@@ -122,6 +122,10 @@
         <p>{{ registerErrorMessage }}</p>
       </div> -->
 
+          <div *ngIf="updateSuccess" class="success-profile-update">
+            <p>{{ successMessage }}</p>
+          </div>
+
           <input
             class="LoginBtn"
             type="submit"

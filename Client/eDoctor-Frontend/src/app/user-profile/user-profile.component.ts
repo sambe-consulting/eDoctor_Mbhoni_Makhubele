@@ -28,6 +28,9 @@ export class UserProfileComponent implements OnInit {
   incorrectPassword = false;
   ErrorMessage = '';
 
+  updateSuccess = false;
+  successMessage = 'Profile successfully updated';
+
   constructor(
     private _modelsService: ModelsService,
     private _url: UrlService,
@@ -64,12 +67,11 @@ export class UserProfileComponent implements OnInit {
     this.http
       .put(this._url.getUrl() + 'updateuser', userData)
       .subscribe((data: any) => {
-        if (data == 1) {
-        } else {
-          this.correctPassword = false;
-          this.incorrectPassword = false;
-          this.ErrorMessage = 'Unkown error has occurred!';
-        }
+        this._modelsService.updatePatient(data);
+        this.updateSuccess = true;
+        setTimeout(() => {
+          this.updateSuccess = false;
+        }, 30000);
       });
   }
 

@@ -76,7 +76,8 @@ export class LoginComponent implements OnInit {
             this._userservice.updateUserType(3);
           } else {
             this._userservice.updateUserType(data['Type']);
-            this._modelsService.UserloggingIn(data);
+            //this._modelsService.UserloggingIn(data); // I must change this one and uses subject, which is on the next line
+            this._modelsService.updatePatient(data);
             console.log('Its user');
           }
           console.log(this.id.length);

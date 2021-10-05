@@ -120,6 +120,17 @@
   }
 }
 
+.success-profile-update {
+  background-color: #42ba96;
+  width: 90%;
+  border-radius: 7px;
+  text-align: center;
+
+  p {
+    padding: 3%;
+  }
+}
+
 .error-password-update {
   background-color: rgb(240, 83, 83);
   width: 70%;
