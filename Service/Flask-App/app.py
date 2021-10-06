@@ -11,6 +11,7 @@ from models.users.patient import Patient
 from models.users.specialist import Specialist
 from database.database import Database
 from models.sector import Sector
+from models.address import Address
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -419,6 +420,25 @@ class RegisterSector(Resource):
                                                         + sector.aproval + "','"\
                                                         + sector.password + "')"
             data.AddHealthSector(query) 
+
+
+            query = "SELECT * FROM Health_Sector WHERE Email='" + json_data['Email'] + "'"
+            id = data.getHealthSector(query)
+
+            SectorAddress = Address(json_data['Country'],
+                            json_data['Street_Address'],
+                            json_data['Suburb'],
+                            json_data['City'],
+                            json_data['Postal_Code'])
+            
+            query = "INSERT INTO Address(country, Street, Suburb, City, Postal_Code, HealthSectorID) "\
+                               +"VALUES ('" + SectorAddress.Country + "','"\
+                                            + SectorAddress.Street + "','"\
+                                            + SectorAddress.Suburb + "','"\
+                                            + SectorAddress.City + "','"\
+                                            + SectorAddress.Postal_Code + "','"\
+                                            + str(id[0]) + "')"
+            data.RegisterAddress(query)
             return {
                 "code": 1,
                 "message": "register successfully"
@@ -517,6 +537,7 @@ class GetSector(Resource):
             return _sector
         else:
             return None
+
 
 
 

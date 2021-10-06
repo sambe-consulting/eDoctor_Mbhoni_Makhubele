@@ -18,6 +18,7 @@ import { DiagnosisComponent } from './diagnosis/diagnosis.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { RegisterSectorComponent } from './register-sector/register-sector.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SectorProfileComponent } from './sector-profile/sector-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     PricingComponent,
     RegisterSectorComponent,
     UserProfileComponent,
+    SectorProfileComponent,
   ],
   imports: [
     BrowserModule,

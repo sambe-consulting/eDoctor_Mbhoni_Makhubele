@@ -63,6 +63,13 @@ class Database():
         self.connection.commit()
         self.connection.close()
 
+    def RegisterAddress(self, query:str):
+        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.connection.close()
+
     def updateSpecialist(self, query: str):
         self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
         self.cursor = self.connection.cursor()

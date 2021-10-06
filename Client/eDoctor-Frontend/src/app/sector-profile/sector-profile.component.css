@@ -140,4 +140,8 @@
 .error-password-update p {
   padding: 3%;
 }
-/*# sourceMappingURL=user-profile.component.css.map */
+
+textarea {
+  width: 90%;
+}
+/*# sourceMappingURL=sector-profile.component.css.map */

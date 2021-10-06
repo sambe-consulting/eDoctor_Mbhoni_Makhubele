@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PricingComponent } from './pricing/pricing.component';
 import { RegisterSectorComponent } from './register-sector/register-sector.component';
 import { RegisterComponent } from './register/register.component';
+import { SectorProfileComponent } from './sector-profile/sector-profile.component';
 import { SectorComponent } from './sector/sector.component';
 import { SpecialistComponent } from './specialist/specialist.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   { path: 'registersector', component: RegisterSectorComponent },
   { path: 'updateuser', component: UserProfileComponent },
+  {path: 'updatesector', component: SectorProfileComponent},
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -45,5 +47,6 @@ export const routingComponents = [
   DiagnosisComponent,
   PricingComponent,
   RegisterSectorComponent,
-  UserProfileComponent
+  UserProfileComponent,
+  SectorProfileComponent
 ];

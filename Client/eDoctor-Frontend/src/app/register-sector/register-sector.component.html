@@ -15,12 +15,16 @@
         ngModel
         required
         #name="ngModel"
+        [class.is-invalid]="!Name"
       />
-      <span class="help-block" *ngIf="!name.valid && name.touched"
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!name.valid && name.touched) || !Name"
         >Required field!</span
       ><br />
 
-      <label>Owner</label><br />
+      <label>Founder</label><br />
       <input
         type="text"
         class="form-control"
@@ -28,7 +32,14 @@
         ngModel
         required
         #owner="ngModel"
+        [class.is-invalid]="!Ownwer"
       />
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!owner.valid && owner.touched) || !Ownwer"
+        >Required field!</span
+      ><br />
 
       <label>Website</label><br />
       <input
@@ -38,21 +49,12 @@
         ngModel
         required
         #website="ngModel"
+        [class.is-invalid]="!Website"
       />
-      <span class="help-block" *ngIf="!website.valid && website.touched"
-        >Required field!</span
-      ><br />
-
-      <label>Address</label><br />
-      <input
-        type="tel"
-        class="form-control"
-        name="address"
-        ngModel
-        required
-        #address="ngModel"
-      />
-      <span class="help-block" *ngIf="!address.valid && address.touched"
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!website.valid && website.touched) || !Website"
         >Required field!</span
       ><br />
 
@@ -66,8 +68,12 @@
         ngModel
         required
         #founded="ngModel"
+        [class.is-invalid]="!Founded"
       />
-      <span class="help-block" *ngIf="!founded.valid && founded.touched"
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!founded.valid && founded.touched) || !Founded"
         >Required field!</span
       ><br />
 
@@ -80,8 +86,12 @@
         ngModel
         required
         #openTime="ngModel"
+        [class.is-invalid]="!B_Hours_Open"
       />
-      <span class="help-block" *ngIf="!openTime.valid && openTime.touched"
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!openTime.valid && openTime.touched) || !B_Hours_Open"
         >Required field!</span
       ><br />
       <span>Closing Time:</span>
@@ -92,8 +102,12 @@
         ngModel
         required
         #closeTime="ngModel"
+        [class.is-invalid]="!B_Hours_Close"
       />
-      <span class="help-block" *ngIf="!closeTime.valid && closeTime.touched"
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!closeTime.valid && closeTime.touched) || !B_Hours_Close"
         >Required field!</span
       ><br />
 
@@ -104,9 +118,13 @@
         name="Description"
         required
         #desc="ngModel"
+        [class.is-invalid]="!Description"
       >
       </textarea>
-      <span class="help-block" *ngIf="!desc.valid && desc.touched"
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!desc.valid && desc.touched) || !Description"
         >Required field!</span
       ><br />
 
@@ -118,9 +136,12 @@
         ngModel
         required
         #contact="ngModel"
-        email
+        [class.is-invalid]="!Contact"
       />
-      <span class="help-block" *ngIf="!contact.valid && contact.touched"
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!contact.valid && contact.touched) || !Contact"
         >Required field!</span
       >
       <br />
@@ -134,11 +155,17 @@
         required
         #email="ngModel"
         email
+        [class.is-invalid]="!Email"
       />
-      <span class="help-block" *ngIf="!email.valid && email.touched"
-        >Required field!</span
+
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="!email.valid && email.touched || !Email"
+        >Invalid email or field is empty!</span
       >
       <br />
+
 
       <label>Password</label><br />
       <input
@@ -148,9 +175,134 @@
         ngModel
         required
         #password="ngModel"
+        [class.is-invalid]="!Password || !passwordMatch"
       />
-      <span class="help-block" *ngIf="!password.valid && password.touched"
-        >Please enter a password!</span
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!password.valid && password.touched) || !Password"
+        >Required field!</span
+      >
+
+      <span style="color: red" class="help-block" *ngIf="!passwordMatch">
+        Password does not match!</span
+      >
+      <br />
+
+      <label>Confirm Password</label><br />
+      <input
+        type="password"
+        class="form-control"
+        name="confirmpassword"
+        ngModel
+        required
+        #confirmpassword="ngModel"
+        [class.is-invalid]="!Confirmpassword || !passwordMatch"
+      />
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="
+          (!confirmpassword.valid && confirmpassword.touched) ||
+          !Confirmpassword
+        "
+        >Required field!</span
+      >
+
+      <span style="color: red" class="help-block" *ngIf="!passwordMatch">
+        Password does not match!</span
+      >
+      <br />
+
+      <label>Country</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="country"
+        ngModel
+        required
+        #country="ngModel"
+        [class.is-invalid]="!Country"
+      />
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!country.valid && country.touched) || !Country"
+        >Required field!</span
+      >
+      <br />
+
+      <label>Street Address</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="streetaddress"
+        ngModel
+        required
+        #streetaddress="ngModel"
+        [class.is-invalid]="!Street_Address"
+      />
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="
+          (!streetaddress.valid && streetaddress.touched) || !Street_Address
+        "
+        >Required field!</span
+      >
+      <br />
+
+      <label>Suburb</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="suburb"
+        ngModel
+        required
+        #suburb="ngModel"
+        [class.is-invalid]="!Suburb"
+      />
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!suburb.valid && suburb.touched) || !Suburb"
+        >Required field!</span
+      >
+      <br />
+
+      <label>City</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="city"
+        ngModel
+        required
+        #city="ngModel"
+        [class.is-invalid]="!City"
+      />
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!city.valid && city.touched) || !City"
+        >Required field!</span
+      >
+      <br />
+
+      <label>Postal Code</label><br />
+      <input
+        type="text"
+        class="form-control"
+        name="postalcode"
+        ngModel
+        required
+        #postalcode="ngModel"
+        [class.is-invalid]="!Postal_COde"
+      />
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="(!postalcode.valid && postalcode.touched) || !Postal_COde"
+        >Required field!</span
       >
       <br />
 
@@ -158,12 +310,7 @@
         <p>{{ registerErrorMessage }}</p>
       </div>
 
-      <input
-        class="LoginBtn"
-        type="submit"
-        value="Register"
-
-      /><br /><br />
+      <input class="LoginBtn" type="submit" value="Register" /><br /><br />
 
       <!-- [disabled]="!registerForm.valid" -->
       <p style="float: right; margin-right: 10.5%">
