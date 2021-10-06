@@ -420,7 +420,7 @@ class RegisterSector(Resource):
                                                         + sector.aproval + "','"\
                                                         + sector.password + "')"
             data.AddHealthSector(query) 
-
+ 
 
             query = "SELECT * FROM Health_Sector WHERE Email='" + json_data['Email'] + "'"
             id = data.getHealthSector(query)

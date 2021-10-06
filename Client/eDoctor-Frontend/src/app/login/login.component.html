@@ -16,8 +16,9 @@
         required
         email
         #email="ngModel"
+        [class.is-invalid]="!Username"
       />
-      <span class="help-block" *ngIf="!email.valid && email.touched"
+      <span class="help-block" *ngIf="!email.valid && email.touched || !Username"
         >Please enter a valid email!</span
       ><br />
       <label>Password</label><br />
@@ -28,8 +29,9 @@
         ngModel
         required
         #password="ngModel"
+        [class.is-invalid]="!Password"
       />
-      <span class="help-block" *ngIf="!password.valid && password.touched"
+      <span class="help-block" *ngIf="!password.valid && password.touched || !Password"
         >Please enter a password!</span
       >
       <br />
@@ -42,7 +44,6 @@
         class="LoginBtn"
         type="submit"
         value="LOGIN"
-        [disabled]="!loginForm.valid"
       /><br /><br />
       <a href="">Forgot password?</a><br />
       <a routerLink='/register' class="signup">Sign up</a>

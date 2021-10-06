@@ -28,6 +28,12 @@ export class LoginComponent implements OnInit {
     }),
   };
 
+  //////For validation
+  Username = true;
+  Password = true;
+
+  /////////////////////
+
   loginData: any;
 
   loginMonitor = false;
@@ -51,40 +57,54 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm) {
-    this.loginData = {
-      username: form.value.username,
-      password: form.value.password,
-    };
+    if (form.valid) {
+      this.loginData = {
+        username: form.value.username,
+        password: form.value.password,
+      };
 
-    this.http
-      .post(this._url.getUrl() + 'login', this.loginData)
-      .subscribe((data: any) => {
-        if (data == 1) {
-          this.loginMonitor = true;
-          this.loginErrorMessage = 'Invalid password';
-        } else if (data == null) {
-          this.loginMonitor = true;
-          this.loginErrorMessage = 'A user with this email does not exist';
-        } else {
-          this.loginMonitor = false;
-          this.id = data['ID_Number'];
-          if (this.id.length != 13) {
-            this._userservice.updateSectorID(this.id);
-            console.log('Its sector');
-            this._modelsService.SectorLogingIn(data);
-            this._userservice.updateSectorID(data['ID_Number']);
-            this._userservice.updateUserType(3);
+      this.http
+        .post(this._url.getUrl() + 'login', this.loginData)
+        .subscribe((data: any) => {
+          if (data == 1) {
+            this.loginMonitor = true;
+            this.loginErrorMessage = 'Invalid password';
+          } else if (data == null) {
+            this.loginMonitor = true;
+            this.loginErrorMessage = 'A user with this email does not exist';
           } else {
-            this._userservice.updateUserType(data['Type']);
-            //this._modelsService.UserloggingIn(data); // I must change this one and uses subject, which is on the next line
-            this._modelsService.updatePatient(data);
-            console.log('Its user');
+            this.loginMonitor = false;
+            this.id = data['ID_Number'];
+            if (this.id.length != 13) {
+              this._userservice.updateSectorID(this.id);
+              console.log('Its sector');
+              this._modelsService.SectorLogingIn(data);
+              this._userservice.updateSectorID(data['ID_Number']);
+              this._userservice.updateUserType(3);
+            } else {
+              this._userservice.updateUserType(data['Type']);
+              //this._modelsService.UserloggingIn(data); // I must change this one and uses subject, which is on the next line
+              this._modelsService.updatePatient(data);
+              console.log('Its user');
+            }
+            console.log(this.id.length);
+            console.log(this.userType);
+            this._userservice.updateLoginStatus(true);
+            this.route.navigate(['']);
           }
-          console.log(this.id.length);
-          console.log(this.userType);
-          this._userservice.updateLoginStatus(true);
-          this.route.navigate(['']);
-        }
-      });
+        });
+    } else {
+      if (!form.value.username) {
+        this.Username = false;
+      } else {
+        this.Username = true;
+      }
+
+      if (!form.value.password) {
+        this.Password = false;
+      } else {
+        this.Password = true;
+      }
+    }
   }
 }

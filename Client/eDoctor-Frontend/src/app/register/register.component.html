@@ -15,8 +15,9 @@
         ngModel
         required
         #name="ngModel"
+        [class.is-invalid]="!Name"
       />
-      <span class="help-block" *ngIf="!name.valid && name.touched"
+      <span style="color: red;" class="help-block" *ngIf="!name.valid && name.touched || !Name"
         >Required field!</span
       ><br />
 
@@ -31,8 +32,9 @@
         ngModel
         required
         #surname="ngModel"
+        [class.is-invalid]="!Surname"
       />
-      <span class="help-block" *ngIf="!surname.valid && surname.touched"
+      <span style="color: red;" class="help-block" *ngIf="!surname.valid && surname.touched || !Surname"
         >Required field!</span
       ><br />
 
@@ -44,8 +46,9 @@
         ngModel
         required
         #contact="ngModel"
+        [class.is-invalid]="!Contact"
       />
-      <span class="help-block" *ngIf="!contact.valid && contact.touched"
+      <span style="color: red;" class="help-block" *ngIf="!contact.valid && contact.touched || !Contact"
         >Required field!</span
       ><br />
 
@@ -57,8 +60,9 @@
         ngModel
         required
         #dob="ngModel"
+        [class.is-invalid]="!DOB"
       />
-      <span class="help-block" *ngIf="!dob.valid && dob.touched"
+      <span style="color: red;" class="help-block" *ngIf="!dob.valid && dob.touched || !DOB"
         >Required field!</span
       ><br />
 
@@ -70,8 +74,9 @@
         ngModel
         required
         #idnumber="ngModel"
+        [class.is-invalid]="!ID_Number"
       />
-      <span class="help-block" *ngIf="!idnumber.valid && idnumber.touched"
+      <span style="color: red;" class="help-block" *ngIf="!idnumber.valid && idnumber.touched || !ID_Number"
         >Required field!</span
       ><br />
 
@@ -82,13 +87,17 @@
         class="form-control gender"
         ngModel
         required
+        #gender="ngModel"
+        [class.is-invalid]="!Gender"
       >
         <option value="male">Male</option>
         <option value="female">Female</option>
         <option value="other">Other</option>
       </select>
+      <span style="color: red;" class="help-block" *ngIf="!gender.valid && gender.touched || !Gender"
+        >Required field!</span
+      ><br />
 
-      <br /><br />
 
       <label>Email</label><br />
       <input
@@ -99,8 +108,9 @@
         required
         #email="ngModel"
         email
+        [class.is-invalid]="!Email"
       />
-      <span class="help-block" *ngIf="!email.valid && email.touched"
+      <span style="color: red;" class="help-block" *ngIf="!email.valid && email.touched || !Email"
         >Required field!</span
       >
       <br />
@@ -113,9 +123,33 @@
         ngModel
         required
         #password="ngModel"
+        [class.is-invalid]="!Password || !passwordMatch"
       />
-      <span class="help-block" *ngIf="!password.valid && password.touched"
-        >Please enter a password!</span
+      <span style="color: red;" class="help-block" *ngIf="!password.valid && password.touched || !Password"
+        >Required field!</span
+      >
+
+      <span style="color: red;" class="help-block" *ngIf="!passwordMatch"
+        >Password does not match!</span
+      >
+      <br />
+
+
+      <label>Confirm Password</label><br />
+      <input
+        type="password"
+        class="form-control"
+        name="confirmpassword"
+        ngModel
+        required
+        #confirmpassword="ngModel"
+        [class.is-invalid]="!ConfirmPassword || !passwordMatch"
+      />
+      <span style="color: red;" class="help-block" *ngIf="!confirmpassword.valid && confirmpassword.touched || !ConfirmPassword"
+        >Required field!</span
+      >
+      <span style="color: red;" class="help-block" *ngIf="!passwordMatch"
+        >Password does not match!</span
       >
       <br />
 
@@ -123,12 +157,7 @@
         <p>{{ registerErrorMessage }}</p>
       </div>
 
-      <input
-        class="LoginBtn"
-        type="submit"
-        value="Sign up"
-        [disabled]="!registerForm.valid"
-      /><br /><br />
+      <input class="LoginBtn" type="submit" value="Sign up" /><br /><br />
 
       <p style="float: right; margin-right: 10.5%">
         Already have account?
