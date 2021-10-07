@@ -58,8 +58,6 @@
         >Required field!</span
       ><br />
 
-      <label>Geolocation</label><br /><br />
-
       <label>Date found</label><br />
       <input
         type="date"
@@ -161,11 +159,10 @@
       <span
         style="color: red"
         class="help-block"
-        *ngIf="!email.valid && email.touched || !Email"
+        *ngIf="(!email.valid && email.touched) || !Email"
         >Invalid email or field is empty!</span
       >
       <br />
-
 
       <label>Password</label><br />
       <input
@@ -306,11 +303,18 @@
       >
       <br />
 
+      <label>Geolocation</label><br />
+      <div style="height: 500px; margin-top: 10px;">
+        <app-map></app-map>
+      </div>
+
+      <br /><br />
+
       <div *ngIf="registerMonitor" class="login-error">
         <p>{{ registerErrorMessage }}</p>
       </div>
 
-      <input class="LoginBtn" type="submit" value="Register" /><br /><br />
+      <input style="top: 500px;" class="LoginBtn" type="submit" value="Register" /><br /><br />
 
       <!-- [disabled]="!registerForm.valid" -->
       <p style="float: right; margin-right: 10.5%">
@@ -318,6 +322,7 @@
         <span>&nbsp;<a routerLink="/login" class="signup">Sign in</a></span>
       </p>
       <br />
+      <br>
     </form>
   </div>
 </div>

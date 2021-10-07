@@ -11,6 +11,9 @@ export class ModelsService {
   patient: Patient | undefined;
   sector: Sector | undefined;
 
+  lng = 0;
+  lat = 0;
+
   private patien = new BehaviorSubject<Object>(__values);
   patien_cast = this.patien.asObservable();
 
@@ -75,6 +78,19 @@ export class ModelsService {
       data['Aproval'],
       data['Password']
     );
+  }
+
+  setLocation(lng: any, lat: any) {
+    this.lat = lat;
+    this.lng = lng;
+  }
+
+  getLat() {
+    return this.lat;
+  }
+
+  getLng() {
+    return this.lng;
   }
 
   getSector() {}

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { UsersService } from '../users.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ModelsService } from '../models/models.service';
 
 @Component({
   selector: 'app-register-sector',
@@ -13,7 +14,8 @@ export class RegisterSectorComponent implements OnInit {
   constructor(
     private _usersService: UsersService,
     private http: HttpClient,
-    private route: Router
+    private route: Router,
+    private _modelsService: ModelsService
   ) {}
   sectorData: any;
   url = 'http://localhost:5000/registersector';
@@ -50,8 +52,8 @@ export class RegisterSectorComponent implements OnInit {
         Owner: form.value.owner,
         Website: form.value.website,
         Address: 'No longer usefull',
-        Longitude: '23.34342',
-        latitude: '12.444994',
+        Longitude: this._modelsService.getLng().toString(),
+        latitude: this._modelsService.getLat().toString(),
         B_Hours_Open: form.value.openTime,
         B_Hours_Close: form.value.closeTime,
         Founded: form.value.founded,
