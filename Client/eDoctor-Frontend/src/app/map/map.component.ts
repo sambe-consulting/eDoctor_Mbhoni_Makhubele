@@ -74,6 +74,8 @@ export class MapComponent implements OnInit {
       }
     });
 
+
+
     const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
     });

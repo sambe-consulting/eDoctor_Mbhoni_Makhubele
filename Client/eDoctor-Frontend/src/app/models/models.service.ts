@@ -1,6 +1,11 @@
+import { style } from '@angular/animations';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import * as mapboxgl from 'mapbox-gl';
 import { BehaviorSubject } from 'rxjs';
 import { __values } from 'tslib';
+import { UrlService } from '../url.service';
+import { Appointment } from './appointments';
 import { Sector } from './sector';
 import { Patient } from './users/patient';
 
@@ -11,13 +16,19 @@ export class ModelsService {
   patient: Patient | undefined;
   sector: Sector | undefined;
 
+  sectors: Sector[] = [];
+  appointments: Appointment[] = [];
+
   lng = 0;
   lat = 0;
+
+  current_lng: any = 0;
+  current_lat: any = 0;
 
   private patien = new BehaviorSubject<Object>(__values);
   patien_cast = this.patien.asObservable();
 
-  constructor() {}
+  constructor(private http: HttpClient, private url: UrlService) {}
 
   updatePatient(data: any) {
     this.patien.next(data);
@@ -96,4 +107,47 @@ export class ModelsService {
   getSector() {}
 
   getAdmin() {}
+
+  ////////Get array of sectors
+  getSectors() {
+    this.http.get(this.url.getUrl() + 'sectors').subscribe((data: any) => {
+      for (var val of data) {
+        let sector = new Sector(
+          val['ID_Number'],
+          val['Name'],
+          val['Owner'],
+          val['Website'],
+          val['Address'],
+          val['Longitude'],
+          val['Latitude'],
+          val['B_Hours_Open'],
+          val['B_Hours_Close'],
+          val['Founded'],
+          val['Description'],
+          val['isActivate'],
+          val['ConsultationFee'],
+          val['Contact'],
+          val['Email'],
+          val['Aproval'],
+          val['Password']
+        );
+
+        this.sectors.push(sector);
+      }
+    });
+
+    return this.sectors;
+  }
+
+  getAppointments() {
+    return this.appointments;
+  }
+
+  patientCurrentLocation() {
+    let curr_lng;
+    let curr_lat;
+    navigator.geolocation.getCurrentPosition(function (position) {
+      return position.coords['longitude'];
+    });
+  }
 }

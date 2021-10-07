@@ -16,6 +16,7 @@ export class Sector {
   Email = '';
   Approved = 0;
   Password = '';
+  distance = 0;
   constructor(
     id: string,
     Name: string,
@@ -52,5 +53,13 @@ export class Sector {
     this.Email = Email;
     this.Approved = Approved;
     this.Password = Password;
+  }
+
+  setDistance(distance: number) {
+    this.distance = distance;
+  }
+
+  getistance() {
+    return this.distance;
   }
 }

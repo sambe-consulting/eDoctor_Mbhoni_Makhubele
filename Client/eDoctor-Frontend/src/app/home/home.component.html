@@ -1,4 +1,6 @@
-<div class="container">
+<!-- When no user has logged in -->
+
+<!-- <div *ngIf="!loggedIn"  class="container">
   <div class="col-md-8">
     <div class="welcome-text">
       <h1>Welcome to e-Doctor</h1><br><br>
@@ -15,4 +17,50 @@
       <br>
     </div>
   </div>
+</div> -->
+
+<div class="container UserLoggedIn">
+  <div class="row">
+    <div class="col-4 appoitments">
+      <div style="text-align: center; font-weight: bold; font-size: large">
+        <p>Appointments</p>
+      </div>
+      <hr />
+      <p *ngIf="!nAppointments" style="font-weight: bold; font-size: small;" >You currently don't have appointment!</p>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+
+    <div class="col-6 specialist">
+      <div style="text-align: center; font-weight: bold; font-size: large">
+        <p>Specialists</p>
+      </div>
+      <hr />
+      <!-- use ngfor on the div bellow -->
+      <div *ngFor="let sector of sectors">
+        <div class="sector">
+          <div style="text-align: center">
+            <p>{{ sector.Name }}</p>
+            <p>
+              Business Hours: {{ sector.B_Hours_Open }} -
+              {{ sector.B_Hours_Close }}
+            </p>
+
+            <p>Distance: 16 km/h</p>
+            <input
+              class="specialist-buttons"
+              value="View Details"
+              type="submit"
+            />&nbsp;
+            <input
+              class="specialist-buttons"
+              value="Book Appointment"
+              type="submit"
+            />
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+  <br />
 </div>
