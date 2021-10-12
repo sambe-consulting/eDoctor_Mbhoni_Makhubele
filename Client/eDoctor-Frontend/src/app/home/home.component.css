@@ -26,4 +26,109 @@
 .container .welcome-text .join {
   font-weight: bold;
 }
+
+.UserLoggedIn {
+  margin-top: 1.5%;
+}
+
+.UserLoggedIn .appoitments {
+  background-color: #ffffff;
+  height: 600px;
+  border-radius: 12px;
+  padding: 2%;
+}
+
+.UserLoggedIn .appoitments .appoitment {
+  background-color: #343b3b;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.UserLoggedIn .appoitments .appoitment .specialist-buttons {
+  width: 50%;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+}
+
+.UserLoggedIn .appoitments .appoitment .specialist-buttons:hover {
+  background-color: white;
+}
+
+.UserLoggedIn .appoitments .appoitment p {
+  color: white;
+  font-weight: bold;
+}
+
+.UserLoggedIn .specialist {
+  background-color: #ffffff;
+  height: auto;
+  border-radius: 12px;
+  padding: 2%;
+}
+
+.UserLoggedIn .specialist .sector {
+  background-color: #343b3b;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.UserLoggedIn .specialist .sector .specialist-buttons {
+  width: 40%;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+}
+
+.UserLoggedIn .specialist .sector .specialist-buttons:hover {
+  background-color: white;
+}
+
+.UserLoggedIn .specialist .sector p {
+  color: white;
+  font-weight: bold;
+}
+
+.sectorDashBoard {
+  background-color: white;
+  margin-top: 10px;
+  height: auto;
+  border: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.appoitment {
+  background-color: #343b3b;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.appoitment .specialist-buttons {
+  width: 50%;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+}
+
+.appoitment .specialist-buttons:hover {
+  background-color: white;
+}
+
+.appoitment p {
+  color: white;
+  font-weight: bold;
+}
 /*# sourceMappingURL=home.component.css.map */

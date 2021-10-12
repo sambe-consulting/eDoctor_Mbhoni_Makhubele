@@ -17,6 +17,8 @@ export class UsersService {
   private user_Type_Registration = new BehaviorSubject<number>(0);
   user_Type_Registration_Cast = this.user_Type_Registration.asObservable();
 
+  private userID = new BehaviorSubject<string>('');
+  userID_Cast = this.userID.asObservable();
 
   constructor() {}
 
@@ -36,6 +38,9 @@ export class UsersService {
     this.user_Type_Registration.next(new_Reg_Type);
   }
 
+  setUserID(id: any) {
+    this.userID.next(id);
+  }
 
 
   getUserType() {}

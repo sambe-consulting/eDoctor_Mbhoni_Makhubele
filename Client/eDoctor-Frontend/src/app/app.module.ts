@@ -20,6 +20,7 @@ import { RegisterSectorComponent } from './register-sector/register-sector.compo
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SectorProfileComponent } from './sector-profile/sector-profile.component';
 import { MapComponent } from './map/map.component';
+import { DirectionComponent } from './direction/direction.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MapComponent } from './map/map.component';
     UserProfileComponent,
     SectorProfileComponent,
     MapComponent,
+    DirectionComponent,
   ],
   imports: [
     BrowserModule,

@@ -59,7 +59,7 @@ export class Sector {
     this.distance = distance;
   }
 
-  getistance() {
+  getDistance() {
     return this.distance;
   }
 }

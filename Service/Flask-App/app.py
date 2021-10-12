@@ -603,20 +603,42 @@ class BookSpecialist(Resource):
             json_data['Specialist_ID']
         )
 
+        
+
+        query = "SELECT * FROM Health_Sector WHERE id='" + appointment.specialist_id + "'"
+
+        _row = data.getHealthSector(query)
+
+        lng = str(_row[5])
+        lat = str(_row[6])
+
+        query = "SELECT * FROM Address WHERE HealthSectorID='" + appointment.specialist_id + "'"
+        _address = data.getHealthSector(query)
+
+        sec_address = str(_address[1] + ", " + _address[2] + ", " + _address[3] + ", " + _address[4])
+
+
+
         query = "INSERT INTO Appointment(Subject,"\
                                         "Description,"\
                                         "AppDate,"\
                                         "Duration,"\
                                         "DateCreated,"\
                                         "Status,"\
+                                        "Address,"\
+                                        "Lng,"\
+                                        "Lat,"\
                                         "PatientID,"\
-                                        "SpecialistID)"\
+                                        "SectorID)"\
                                         "VALUES('" + appointment.subject + "','"\
                                                    + appointment.description + "','"\
-                                                   + appointment.date + "','"\
+                                                   + appointment.appointmentDatetime() + "','"\
                                                    + appointment.duration + "','"\
                                                    + appointment.dateCreated + "','"\
                                                    + appointment.status + "','"\
+                                                   + sec_address + "','"\
+                                                   + lng + "','"\
+                                                   + lat + "','"\
                                                    + appointment.patient_id + "','"\
                                                    + appointment.specialist_id + "')"\
                                                     
@@ -626,6 +648,7 @@ class BookSpecialist(Resource):
             "code": 1,
             "message": "Booking sent"
         }
+        # return appointment.appointmentDatetime()
                                                   
 
 class GetAppointments(Resource):
@@ -646,8 +669,11 @@ class GetAppointments(Resource):
                     "Duration": booking[4],
                     "DateCreated": booking[5],
                     "Status": booking[6],
-                    "PatientID": booking[7],
-                    "SpecialistID": booking[8]
+                    "Address": booking[7],
+                    "Lng": booking[8],
+                    "Lat": booking[9],
+                    "PatientID": booking[10],
+                    "SpecialistID": booking[11]
                 }
 
                 response.append(_booking)

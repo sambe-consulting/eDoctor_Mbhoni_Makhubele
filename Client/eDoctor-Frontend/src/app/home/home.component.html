@@ -1,36 +1,71 @@
 <!-- When no user has logged in -->
 
-<!-- <div *ngIf="!loggedIn"  class="container">
+<div *ngIf="!loggedIn" class="container">
   <div class="col-md-8">
     <div class="welcome-text">
-      <h1>Welcome to e-Doctor</h1><br><br>
-      <p>There are many doctors around you, and without e-Doctor it will be very difficult for you to reach them.</p><br><br>
+      <h1>Welcome to e-Doctor</h1>
+      <br /><br />
+      <p>
+        There are many doctors around you, and without e-Doctor it will be very
+        difficult for you to reach them.
+      </p>
+      <br /><br />
       <p>But with e-Doctor, you are able to do the following:</p>
-      <ul style="list-style-type:none;">
-          <li>Locate doctors that are close to you.</li>
-          <li>Book appointment.</li>
-          <li>Diagnose symptoms.</li>
+      <ul style="list-style-type: none">
+        <li>Locate doctors that are close to you.</li>
+        <li>Book appointment.</li>
+        <li>Diagnose symptoms.</li>
       </ul>
-      <p class="join">What are you waiting for?  <span><a routerLink='/register'>Sign up</a> now!</span></p>
-      <p class="join"> Already a member? <span><a routerLink='/login'>Sign in</a> now!</span></p>
-      <br>
-      <br>
+      <p class="join">
+        What are you waiting for?
+        <span><a routerLink="/register">Sign up</a> now!</span>
+      </p>
+      <p class="join">
+        Already a member? <span><a routerLink="/login">Sign in</a> now!</span>
+      </p>
+      <br />
+      <br />
     </div>
   </div>
-</div> -->
+</div>
 
-<div class="container UserLoggedIn">
+<div class="container UserLoggedIn" *ngIf="userType === 1 && loggedIn">
   <div class="row">
-    <div class="col-4 appoitments">
+    <div class="col-4 appoitments" style="height: auto">
       <div style="text-align: center; font-weight: bold; font-size: large">
         <p>Appointments</p>
       </div>
       <hr />
-      <p *ngIf="!nAppointments" style="font-weight: bold; font-size: small;" >You currently don't have appointment!</p>
+      <p
+        *ngIf="!AppointmentNotEmpty"
+        style="font-weight: bold; font-size: small"
+      >
+        You currently don't have appointment!
+      </p>
+
+      <div *ngFor="let appointment of Specific_Appointments">
+        <div class="appoitment">
+          <div style="text-align: center">
+            <p>Name of Sector</p>
+            <p>Date: {{ appointment.getDate() }}</p>
+            <p>Time: {{ appointment.getTime() }}</p>
+            <p>Address: {{ appointment.address }}</p>
+            <hr style="color: white" />
+            <input
+              class="specialist-buttons"
+              value="Direction"
+              type="submit"
+              (click)="GetDirection(appointment.lng, appointment.lat)"
+            /><br /><br />
+            <!-- <input class="specialist-buttons" value="Cancel" type="submit" (click)="Cancel(appointment.id)" /> -->
+          </div>
+        </div>
+        <br />
+      </div>
     </div>
     &nbsp;&nbsp;&nbsp;
 
-    <div class="col-6 specialist">
+    <div class="col-6 specialist" style="height: auto">
       <div style="text-align: center; font-weight: bold; font-size: large">
         <p>Specialists</p>
       </div>
@@ -45,7 +80,10 @@
               {{ sector.B_Hours_Close }}
             </p>
 
-            <p>Distance: 16 km/h</p>
+            <p *ngIf="sector.getDistance()">
+              Distance: {{ sector.getDistance() }} km
+            </p>
+            <p *ngIf="!sector.getDistance()">Distance: Calculating...</p>
             <input
               class="specialist-buttons"
               value="View Details"
@@ -55,6 +93,7 @@
               class="specialist-buttons"
               value="Book Appointment"
               type="submit"
+              (click)="BookAppointment(sector.id)"
             />
           </div>
         </div>
@@ -63,4 +102,28 @@
     </div>
   </div>
   <br />
+</div>
+
+<div class="container" *ngIf="userType === 3 && loggedIn">
+  <div class="col-md-8 sectorDashBoard" style="border: 12px; margin-left: 15%">
+    <p style="font-weight: bold">
+      Appointments[{{ Specific_Appointments.length }}]
+    </p>
+    <!-- *ngFor="let appointment of Specific_Appointments" -->
+    <div *ngFor="let appointment of Specific_Appointments">
+      <div class="appoitment">
+        <div style="text-align: center">
+          <p>Date: {{ appointment.getDate() }}</p>
+          <p>Time: {{ appointment.getTime() }}</p>
+          <br />
+          <!-- <input class="specialist-buttons" value="Cancel" type="submit" (click)="Cancel(appointment.id)" /> -->
+        </div>
+      </div>
+      <br />
+    </div>
+  </div>
+</div>
+
+<div>
+  
 </div>

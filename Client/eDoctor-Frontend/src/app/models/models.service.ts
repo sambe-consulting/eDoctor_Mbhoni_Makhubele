@@ -5,6 +5,8 @@ import * as mapboxgl from 'mapbox-gl';
 import { BehaviorSubject } from 'rxjs';
 import { __values } from 'tslib';
 import { UrlService } from '../url.service';
+import { UserIDService } from '../user-id.service';
+import { UsersService } from '../users.service';
 import { Appointment } from './appointments';
 import { Sector } from './sector';
 import { Patient } from './users/patient';
@@ -28,7 +30,15 @@ export class ModelsService {
   private patien = new BehaviorSubject<Object>(__values);
   patien_cast = this.patien.asObservable();
 
-  constructor(private http: HttpClient, private url: UrlService) {}
+  private location = new BehaviorSubject<Object>(__values);
+  location_cast = this.location.asObservable();
+
+  constructor(
+    private http: HttpClient,
+    private url: UrlService,
+    private _userID_Service: UserIDService,
+    private _userservice: UsersService
+  ) {}
 
   updatePatient(data: any) {
     this.patien.next(data);
@@ -119,7 +129,7 @@ export class ModelsService {
           val['Website'],
           val['Address'],
           val['Longitude'],
-          val['Latitude'],
+          val['latitude'],
           val['B_Hours_Open'],
           val['B_Hours_Close'],
           val['Founded'],
@@ -135,19 +145,93 @@ export class ModelsService {
         this.sectors.push(sector);
       }
     });
-
     return this.sectors;
   }
 
-  getAppointments() {
-    return this.appointments;
+  patientCurrentLocation() {
+    // var lng = '12';
+    // navigator.geolocation.getCurrentPosition(function (position) {
+    //   const pos = {
+    //     lng: position.coords.longitude,
+    //     lat: position.coords.latitude,
+    //   };
+    // });
+
+    var _postion = new BehaviorSubject<any>(__values);
+    var pos_cast = _postion.asObservable();
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+      var loc = {
+        lng: position.coords.longitude,
+        lat: position.coords.latitude,
+      };
+      _postion.next(loc);
+    });
+
+    return pos_cast;
   }
 
-  patientCurrentLocation() {
-    let curr_lng;
-    let curr_lat;
-    navigator.geolocation.getCurrentPosition(function (position) {
-      return position.coords['longitude'];
-    });
+  getSecAppoint(id: any) {
+    var _appointments = new BehaviorSubject<Appointment[]>(this.appointments);
+    var _app_cast = _appointments.asObservable();
+
+    this.http
+      .get(this.url.getUrl() + 'appointments/' + id)
+      .subscribe((data: any) => {
+        for (var val of data) {
+          let apmnt = new Appointment(
+            val['id'],
+            val['Subject'],
+            val['Description'],
+            val['Date'],
+            val['Duration'],
+            val['DateCreated'],
+            val['Status'],
+            val['PatientID'],
+            val['SpecialistID'],
+            val['Lng'],
+            val['Lat'],
+            val['Address']
+          );
+          this.appointments.push(apmnt);
+        }
+        _appointments.next(this.appointments);
+      });
+    // return this.appointments;
+    return _app_cast;
+  }
+
+  getAppointments() {
+    var _appointments = new BehaviorSubject<Appointment[]>(this.appointments);
+    var _app_cast = _appointments.asObservable();
+
+    this.http
+      .get(this.url.getUrl() + 'appointments/' + this._userID_Service.getID())
+      .subscribe((data: any) => {
+        for (var val of data) {
+          let apmnt = new Appointment(
+            val['id'],
+            val['Subject'],
+            val['Description'],
+            val['Date'],
+            val['Duration'],
+            val['DateCreated'],
+            val['Status'],
+            val['PatientID'],
+            val['SpecialistID'],
+            val['Lng'],
+            val['Lat'],
+            val['Address']
+          );
+          this.appointments.push(apmnt);
+        }
+        _appointments.next(this.appointments);
+      });
+    // return this.appointments;
+    return _app_cast;
   }
 }
+
+//  this.lng = lng;
+//  this.lat = lat;
+//  this.address = address;

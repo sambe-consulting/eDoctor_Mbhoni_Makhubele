@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { DiagnosisComponent } from './diagnosis/diagnosis.component';
+import { DirectionComponent } from './direction/direction.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +19,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'direction', component: DirectionComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'specialists', component: SpecialistComponent },
   { path: 'sector', component: SectorComponent },
@@ -26,7 +28,7 @@ const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   { path: 'registersector', component: RegisterSectorComponent },
   { path: 'updateuser', component: UserProfileComponent },
-  {path: 'updatesector', component: SectorProfileComponent},
+  { path: 'updatesector', component: SectorProfileComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
@@ -48,5 +50,6 @@ export const routingComponents = [
   PricingComponent,
   RegisterSectorComponent,
   UserProfileComponent,
-  SectorProfileComponent
+  SectorProfileComponent,
+  DirectionComponent,
 ];

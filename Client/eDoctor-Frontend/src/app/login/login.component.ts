@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { UsersService } from '../users.service';
 import { ModelsService } from '../models/models.service';
 import { UrlService } from '../url.service';
+import { UserIDService } from '../user-id.service';
+import { Appointment } from '../models/appointments';
 
 @Component({
   selector: 'app-login',
@@ -48,13 +50,16 @@ export class LoginComponent implements OnInit {
     private _userservice: UsersService,
     private route: Router,
     private _modelsService: ModelsService,
-    private _url: UrlService
+    private _url: UrlService,
+    private _userID_Service: UserIDService
   ) {}
 
   ngOnInit() {
     this._userservice.cast.subscribe((status) => (this.LoggedIn = status));
     this._userservice.userType_Cast.subscribe((type) => (this.userType = type));
   }
+
+
 
   login(form: NgForm) {
     if (form.valid) {
@@ -73,6 +78,7 @@ export class LoginComponent implements OnInit {
             this.loginMonitor = true;
             this.loginErrorMessage = 'A user with this email does not exist';
           } else {
+
             this.loginMonitor = false;
             this.id = data['ID_Number'];
             if (this.id.length != 13) {
@@ -85,6 +91,8 @@ export class LoginComponent implements OnInit {
               this._userservice.updateUserType(data['Type']);
               //this._modelsService.UserloggingIn(data); // I must change this one and uses subject, which is on the next line
               this._modelsService.updatePatient(data);
+              this._userservice.setUserID(data['ID_Number']);
+              this._userID_Service.setID(data['ID_Number']);
               console.log('Its user');
             }
             console.log(this.id.length);
