@@ -19,14 +19,44 @@
               [(ngModel)]="slotDate"
             />
             <br />
-            <p style="font-size: large">Choose Time:</p>
+            <p style="font-size: large">Choose Slot:</p>
             <div class="slots">
-              <a *ngFor="let slot of filtered_Slots" class="slot"> {{ slot.time }} </a>
+              <a
+                class="slot"
+                *ngFor="let slot of filtered_Slots"
+                (click)="SelectSlot(slot.time)"
+              >
+                {{ slot.time }}
+              </a>
+
+              <span style="color: red" class="help-block" *ngIf="!SlotChoosen"
+                >Please select time slot!</span
+              >
             </div>
-            <br />
+            <!-- <br /> -->
+
+            <p
+              *ngIf="choosenSlot !== '...'"
+              style="font-weight: bolder; font-size: larger"
+            >
+              Choosen Slot: {{ choosenSlot }}
+            </p>
             <p style="font: large">Reason for visit:</p>
             <div class="description">
-              <textarea class="form-control" name="reason"></textarea>
+              <textarea
+                class="form-control"
+                name="reason"
+                #name="ngModel"
+                ngModel
+                required
+                [class.is-invalid]="(!name.valid && name.touched) || !formValid"
+              ></textarea>
+              <span
+                style="color: red"
+                class="help-block"
+                *ngIf="(!name.valid && name.touched) || !formValid"
+                >Required field!</span
+              >
             </div>
             <br />
             <div style="text-align: center">

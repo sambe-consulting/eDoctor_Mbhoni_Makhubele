@@ -3,6 +3,7 @@ import { KeyValueDiffer } from '@angular/core';
 import { KeyValueDiffers } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 import { Slot } from '../models/slot';
 import { AvailabilityService } from '../services/availability.service';
@@ -24,10 +25,15 @@ export class BookingCMPComponent implements OnInit, DoCheck, OnChanges {
   differ: KeyValueDiffer<string, any>;
   selectedDate = new BehaviorSubject<string>(this.minDate);
   select_Date_Cast = this.selectedDate.asObservable();
+  formValid = true;
+
+  choosenSlot = '...';
+  SlotChoosen = true;
   constructor(
     private booking: BookingService,
     private availability: AvailabilityService,
-    private differs: KeyValueDiffers
+    private differs: KeyValueDiffers,
+    private cookie: CookieService
   ) {
     this.differ = this.differs.find({}).create();
   }
@@ -60,6 +66,11 @@ export class BookingCMPComponent implements OnInit, DoCheck, OnChanges {
       });
   }
 
+  SelectSlot(time: any) {
+    this.choosenSlot = time;
+    this.SlotChoosen = true;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
@@ -75,5 +86,22 @@ export class BookingCMPComponent implements OnInit, DoCheck, OnChanges {
     }
   }
 
-  Submit(form: NgForm) {}
+  Submit(form: NgForm) {
+    if (!form.valid) {
+      this.formValid = false;
+    }
+
+    if (this.choosenSlot == '...') {
+      this.SlotChoosen = false;
+    }
+
+    if (form.valid && this.choosenSlot != '...') {
+      console.log(form.value.reason);
+      console.log(this.cookie.get('id'))
+    }
+
+    setTimeout(() => {
+      this.formValid = true;
+    }, 3000);
+  }
 }

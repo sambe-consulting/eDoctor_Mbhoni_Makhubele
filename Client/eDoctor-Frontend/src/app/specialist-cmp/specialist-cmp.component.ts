@@ -21,8 +21,19 @@ export class SpecialistCMPComponent implements OnInit {
   }
 
   bookAppointment(id: string, name: string) {
-    this.openForm = true;
+    if (this.openForm == false) {
+      this.openForm = true;
+    } else {
+      this.openForm = false;
+      // this.openForm = true;
+    }
+
+    setTimeout(()=>{
+      this.openForm = true;
+    },50)
+
     this.bookingServie.setSectorID(id);
     this.bookingServie.setSector_Name(name);
+
   }
 }
