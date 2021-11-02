@@ -1,0 +1,81 @@
+<div class="w3-container">
+  <div class="row">
+    <div class="specialist-root">
+      <div style="font-weight: bold; font-size: 25px">
+        <p>Availability</p>
+        <hr style="width: 55vw; position: absolute; left: 41%; top: 17%" />
+      </div>
+
+      <div>
+        <div class="availability">
+          <!-- <div class="vl"></div> -->
+
+          <form #slotForm="ngForm">
+            <p style="font-weight: bolder">Date:</p>
+            <input
+              type="date"
+              name="date"
+              class="form-control datepicker"
+              ngModel
+              min="{{ minDate }}"
+              [(ngModel)]="slot_date"
+            /><br />
+
+            <p style="font-weight: bolder">Time:</p>
+            <ngb-timepicker name="time" [(ngModel)]="time"></ngb-timepicker>
+          </form>
+
+          <br />
+          <a
+            class="book-appointment"
+            style="margin-left: 15.4%"
+            (click)="AddSlot(slotForm)"
+            >Add Slot
+          </a>
+          <br />
+        </div>
+        <div class="slots">
+          <div>
+            <div style="text-align: center">
+              <p style="font-weight: bold; font-size: 20px">Time slots</p>
+              <hr />
+            </div>
+            <div>
+              <form #filterForm="ngForm">
+                <div style="display: flex; margin-left: 19%">
+                  <input
+                    type="date"
+                    name="date"
+                    class="form-control datefilter"
+                    ngModel
+                    min="{{ minDate }}"
+                    #date="ngModel"
+                    [(ngModel)]="slot_date"
+                  />
+
+                  <input
+                    class="datefilter button"
+                    style="height: 4.5vh"
+                    type="submit"
+                    value="Filter"
+                    (click)="filter_slots(date.value)"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="slot" *ngFor="let item of filtered_slots">
+              <a
+                class="book-appointment"
+                style="display: block; width: 100%; text-align: center"
+                (click)="delete_slot(item.id)"
+                >{{ item.time }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,11 +6,11 @@ import { __values } from 'tslib';
   providedIn: 'root',
 })
 export class DirectionService {
-  coords = new BehaviorSubject<Object>(__values);
-  coords_cast = this.coords.asObservable();
+  dest_coords = new BehaviorSubject<Object>(__values);
+  dest_coords_cast = this.dest_coords.asObservable();
 
-  sourceCoords = new BehaviorSubject<Object>(__values);
-  sourceCoords_cast = this.sourceCoords.asObservable();
+  origin_Coords = new BehaviorSubject<Object>(__values);
+  origin_Coords_cast = this.origin_Coords.asObservable();
 
   constructor() {}
 }

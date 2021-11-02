@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACZ,gBAAgB,EAAE,KAAK;EACvB,KAAK,EAAE,IAAI;EAEX,MAAM,EAAE,IAAI;EACZ,OAAO,EAAE,EAAE;EACX,aAAa,EAAE,GAAG;EAClB,UAAU,EAAC,wBAAwB;CACpC;;AAED,AAAA,QAAQ,CAAC;EACP,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,IAAI;EACZ,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,GAAG;CACnB;;AAED,AAAA,QAAQ,AAAA,MAAM,CAAC;EACb,gBAAgB,EAAE,OAAkB;CACrC",
+    "sources": [
+        "appointments-cmp.component.scss"
+    ],
+    "names": [],
+    "file": "appointments-cmp.component.css"
+}

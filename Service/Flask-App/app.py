@@ -354,6 +354,9 @@ class GetUsers(Resource):
 
 ###########  Sectors Service  ###############
 
+
+
+
 class RegisterSector(Resource):
     def post(self):
         data = Database()
@@ -470,7 +473,7 @@ class GetSectors(Resource):
                     "Contact": sector[13],
                     "Email": sector[14],
                     "Aproval": sector[15],
-                    "Password": sector[16]
+                    "Password": sector[16],
                 }
                 response.append(_sector)
         
@@ -651,11 +654,19 @@ class BookSpecialist(Resource):
         # return appointment.appointmentDatetime()
                                                   
 
+class Update(Resource):
+    def put(self, appID):
+        data = Database()
+        json_data = request.get_json(force=False)
+        query = "UPDATE Appointment SET Status='" + json_data["Status"] + "' WHERE id=" + appID
+        data.BookAppointment(query)
+
+
 class GetAppointments(Resource):
     def get(self):
         response = {'bookings': []}
         data = Database()######change this one, replace it with sqlalchemy methods
-        query = "SELECT * FROM Appointment"
+        query = "SELECT * FROM ((Appointment INNER JOIN Health_Sector ON Appointment.SectorID=Health_Sector.id) INNER JOIN User ON Appointment.PatientID=User.ID_Number);"
         bookings = data.getAppoitnments(query)
         response = []
 
@@ -673,7 +684,11 @@ class GetAppointments(Resource):
                     "Lng": booking[8],
                     "Lat": booking[9],
                     "PatientID": booking[10],
-                    "SpecialistID": booking[11]
+                    "SpecialistID": booking[11],
+                    "Specialist_Name": booking[13],
+                    "Patient_Name": booking[30],
+                    "Patient_Middle_Name": booking[31],
+                    "Patient_Surname": booking[32]
                 }
 
                 response.append(_booking)
@@ -715,13 +730,60 @@ class BookingResponse(Resource):
     def put(self, specialistID, status):
         pass
 
+class Add_Time(Resource):
+    def post(self):
+        data = Database()
+        json_data = request.get_json(force=False)
+        date = json_data['date']
+        time = json_data['time']
+        sectorID = json_data['sectorid']
+        query = "INSERT INTO Time(date, time, SectorID) VALUES('" + str(date) + "','"\
+                                              + str(time) + "','"\
+                                              + str(sectorID) + "')"
+
+        data.AddAvailability(query)
+        return 1
+
+class GetAvailability(Resource):
+    def get(self, id):
+        data = Database()
+        query = "SELECT * FROM Time WHERE SectorID='" + id + "'"
+        rows = data.getAvailability(query)
+        return rows
 
 
+class deleteSlot(Resource):
+    def delete(self,id):
+        data = Database()
+        query = "DELETE FROM Time WHERE id='" + id + "'"
+        data.AddAvailability(query)
+        return 1
 
+class slot_taken(Resource):
+    def put(self,id):
+        data = Database()
+        query = "UPDATE Time SET taken=1 WHERE id='" + id + "'"
+        data.AddAvailability(query)
+        return 1
+
+class slot_free(Resource):
+    def put(self,id):
+        data = Database()
+        query = "UPDATE Time SET taken=0 WHERE id='" + id + "'"
+        data.AddAvailability(query)
+        return 1
+
+
+api.add_resource(slot_free,'/slot_free/<string:id>')
+api.add_resource(slot_taken,'/slot_taken/<string:id>')
+api.add_resource(deleteSlot, '/removeslot/<string:id>')
+api.add_resource(GetAvailability,'/getavailability/<string:id>')
+api.add_resource(Add_Time, '/addavailability')
 api.add_resource(hello,'/')
 api.add_resource(Login,'/login')
 api.add_resource(UpdatePassword, '/updatepassword')
 api.add_resource(UpdateUser, '/updateuser')
+api.add_resource(Update, '/updateapp/<string:appID>')
 api.add_resource(GetAppointments, '/appointments') #get all bookings
 api.add_resource(GetUserAppointments, '/appointments/<string:user_id>')
 api.add_resource(BookSpecialist, '/bookappointment') # book specialist

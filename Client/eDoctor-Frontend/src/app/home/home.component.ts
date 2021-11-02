@@ -1,5 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 // import { map } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -25,6 +31,8 @@ export class HomeComponent implements OnInit {
   _All_appointments: Appointment[] = [];
   _Specific_Appointments: Appointment[] = [];
 
+  Sector_appointments: Appointment[] = [];
+
   sectors: Sector[] = [];
   newSectors: Sector[] = [];
 
@@ -41,124 +49,104 @@ export class HomeComponent implements OnInit {
     private url: UrlService,
     private _directionService: DirectionService,
     private route: Router
-  ) {}
+  ) {
+    this.All_appointments = [];
+    this.Specific_Appointments = [];
+    this._All_appointments = [];
+    this._Specific_Appointments = [];
+  }
 
   ngOnInit(): void {
-    this._userservice.cast.subscribe((status) => (this.loggedIn = status));
-    this.sectors = this._modelservice.getSectors();
+    this._userservice.cast.subscribe(
+      (status) => (
+        (this.loggedIn = status),
+        console.log('On header'),
+        console.log(this.loggedIn)
+      )
+    );
 
-    this._userservice.userType_Cast.pipe().subscribe((data: any) => {
-      this.userType = data;
-    });
+    if (this.loggedIn == true) {
+      this._userservice.cast.subscribe((status) => (this.loggedIn = status));
 
-    let secID: any;
-    this._userservice.sector_id_cast.pipe().subscribe((data: any) => {
-      secID = data;
-    });
+      this.sectors = this._modelservice.getSectors(); //get all sectors, to display to all patients
 
-    /////////Get appointments
+      console.log('Check: ' + this.sectors.length);
+      this._userservice.userType_Cast.pipe().subscribe((data: any) => {
+        this.userType = data;
+      });
 
-    let check;
-    let id = this._modelservice.getUser()?.ID_Number;
-    this._modelservice
-      .getAppointments()
-      .pipe()
-      .subscribe((data: any[]) => {
-        console.log(data);
-        check = data.length;
-        this.Specific_Appointments = data;
+      if (this.userType == 1) {
+        //if patient logged in
+        let check;
+        let id = this._modelservice.getUser()?.ID_Number; //get patient id
 
-        if (this.Specific_Appointments.length == 0) {
-          this.AppointmentNotEmpty = false;
-        } else {
-          this.AppointmentNotEmpty = true;
+        this._modelservice
+          .getAppointments()
+          .pipe()
+          .subscribe((data: any[]) => {
+            check = data.length;
+            this.Specific_Appointments = data;
+
+            if (this.Specific_Appointments.length == 0) {
+              this.AppointmentNotEmpty = false;
+            } else {
+              this.AppointmentNotEmpty = true;
+            }
+          });
+
+        for (var ap of this.All_appointments) {
+          if (ap.PatientID == id) {
+            this.Specific_Appointments.push(ap);
+          }
+        }
+      } else if (this.userType == 3) {
+        //if sector logged in
+        let secID: any;
+        this._userservice.sector_id_cast.pipe().subscribe((data: any) => {
+          secID = data;
+        });
+
+        this._modelservice
+          .getSecAppoint(secID)
+          .pipe()
+          .subscribe((data: any[]) => {
+            this.Sector_appointments = data;
+          });
+      }
+
+      /////////Get appointments
+
+      /////////////////////////////Don't go beyond here /////////////////
+
+      //////////////////////////////////////
+
+      this._modelservice.patientCurrentLocation().subscribe((data) => {
+        this.currentLoc.push(data);
+
+        if (this.currentLoc.length == 2) {
+          console.log(console.log(this.currentLoc[1]));
+
+          if (typeof this.currentLoc[1] == null) {
+            console.log('Haa fok');
+          }
+
+          //user location
+          var userlng = this.currentLoc[1]['lng'];
+          var userlat = this.currentLoc[1]['lat'];
+
+          let c = {
+            lng: userlng,
+            lat: userlat,
+          };
+
+          this._directionService.origin_Coords.next(c);
+
+          for (var sector of this.sectors) {
+            // sector.setDistance();
+          }
         }
       });
-
-    this._modelservice
-      .getSecAppoint(secID)
-      .pipe()
-      .subscribe((data: any[]) => {
-        this.All_appointments = data;
-
-      });
-
-    console.log('Here:' + check);
-
-    for (var ap of this.All_appointments) {
-      if (ap.PatientID == id) {
-        this.Specific_Appointments.push(ap);
-      }
     }
-
-    console.log('This is id: ' + this.All_appointments.length);
-
-    this._modelservice.patientCurrentLocation().subscribe((data) => {
-      this.currentLoc.push(data);
-      if (this.currentLoc.length == 2) {
-        console.log(console.log(this.currentLoc[1]));
-
-        if (typeof this.currentLoc[1] == null) {
-          console.log('Haa fok');
-        }
-
-        //user location
-        var userlng = this.currentLoc[1]['lng'];
-        var userlat = this.currentLoc[1]['lat'];
-
-        let c = {
-          lng: userlng,
-          lat: userlat,
-        };
-
-        this._directionService.sourceCoords.next(c);
-
-        // for (var sector of this.sectors) {
-        //   this.http
-        //     .get(
-        //       'https://api.mapbox.com/directions/v5/mapbox/driving/' +
-        //         userlng +
-        //         ',' +
-        //         userlat +
-        //         ';' +
-        //         sector.Longitude +
-        //         ',' +
-        //         sector.Latitude +
-        //         '?geometries=geojson&access_token=pk.eyJ1IjoibWJob25pNTU4NSIsImEiOiJja3VjeGRncGkxNHRwMnVtdjdzaGsyZG5uIn0.A4zZliHtCuE0Oq-0JKq7Kw'
-        //     )
-        //     .subscribe((data: any) => {
-        //       //console.log("Joe: " + data['routes'][0]['distance']);
-
-        //       this.distance = parseFloat(
-        //         (data['routes'][0]['distance'] / 1000).toString()
-        //       ).toFixed(1);
-
-        //       sector.setDistance(this.distance);
-
-        //       console.log(sector.getDistance());
-        //     });
-        // }
-
-        for (var sector of this.sectors) {
-          sector.setDistance(
-            this.Calc_distance(
-              userlat,
-              sector.Latitude,
-              sector.Longitude,
-              userlng
-            )
-          );
-        }
-        console.log(
-          this.Calc_distance(
-            userlat,
-            this.sectors[3].Latitude,
-            this.sectors[3].Longitude,
-            userlng
-          )
-        );
-      }
-    });
   }
 
   GetDirection(_lng: any, _lat: any) {
@@ -167,35 +155,50 @@ export class HomeComponent implements OnInit {
       lat: _lat,
     };
 
-    this._directionService.coords.next(coords);
+    this._directionService.dest_coords.next(coords);
     this.route.navigate(['direction']);
   }
 
-  Calc_distance(lat1: any, lat2: any, lon1: any, lon2: any) {
-    // The math module contains a function
-    // named toRadians which converts from
-    // degrees to radians.
-    lon1 = (lon1 * Math.PI) / 180;
-    lon2 = (lon2 * Math.PI) / 180;
-    lat1 = (lat1 * Math.PI) / 180;
-    lat2 = (lat2 * Math.PI) / 180;
+  approve(id: any) {
+    var data = {
+      Status: '1',
+    };
 
-    // Haversine formula
-    let dlon = lon2 - lon1;
-    let dlat = lat2 - lat1;
-    let a =
-      Math.pow(Math.sin(dlat / 2), 2) +
-      Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(dlon / 2), 2);
+    this.http
+      .put(this.url.getUrl() + 'updateapp/' + id, data)
+      .pipe()
+      .subscribe((data) => {
+        //code here
+      });
+  }
 
-    let c = 2 * Math.asin(Math.sqrt(a));
+  Cancel(id: any) {
+    var data = {
+      Status: '3',
+    };
 
-    // Radius of earth in kilometers. Use 3956
-    // for miles
-    // let r = 6371;
-    let r = 3956;
+    this.http
+      .put(this.url.getUrl() + 'updateapp/' + id, data)
+      .pipe()
+      .subscribe((data) => {
+        //code here
+      });
+  }
 
-    // calculate the result
-    return c * r;
+  cancelApp(id: any) {
+    var data = {
+      Status: '2',
+    };
+    this.http
+      .put(this.url.getUrl() + 'updateapp/' + id, data)
+      .pipe()
+      .subscribe((data) => {
+        //code here
+      });
+  }
+
+  Calc_distance(origin: any, destination: any) {
+    // this.http.get()
   }
 
   BookAppointment(SectorID: any) {

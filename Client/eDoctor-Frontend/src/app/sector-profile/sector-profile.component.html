@@ -17,6 +17,7 @@
             ngModel
             required
             #name="ngModel"
+            [(ngModel)]="Name"
           />
           <span class="help-block" *ngIf="!name.valid && name.touched"
             >Required field!</span
@@ -29,6 +30,7 @@
             name="owner"
             ngModel
             required
+            [(ngModel)]="Owner"
             #owner="ngModel"
           /><br />
 
@@ -39,26 +41,12 @@
             name="website"
             ngModel
             required
+            [(ngModel)]="Website"
             #website="ngModel"
           />
           <span class="help-block" *ngIf="!website.valid && website.touched"
             >Required field!</span
           ><br />
-
-          <label>Address</label><br />
-          <input
-            type="tel"
-            class="form-control"
-            name="address"
-            ngModel
-            required
-            #address="ngModel"
-          />
-          <span class="help-block" *ngIf="!address.valid && address.touched"
-            >Required field!</span
-          ><br />
-
-          <label>Geolocation</label><br /><br />
 
           <label>Date found</label><br />
           <input
@@ -67,6 +55,7 @@
             name="founded"
             ngModel
             required
+            [(ngModel)]="Founded"
             #founded="ngModel"
           />
           <span class="help-block" *ngIf="!founded.valid && founded.touched"
@@ -80,6 +69,7 @@
             class="form-control"
             name="openTime"
             ngModel
+            [(ngModel)]="B_Hours_Open"
             required
             #openTime="ngModel"
           />
@@ -93,6 +83,7 @@
             name="closeTime"
             ngModel
             required
+            [(ngModel)]="B_Hours_Close"
             #closeTime="ngModel"
           />
           <span class="help-block" *ngIf="!closeTime.valid && closeTime.touched"
@@ -105,6 +96,7 @@
             class="form-control"
             name="Description"
             required
+            [(ngModel)]="Description"
             #desc="ngModel"
           >
           </textarea>
@@ -118,6 +110,7 @@
             class="form-control"
             name="contact"
             ngModel
+            [(ngModel)]="Contact"
             required
             #contact="ngModel"
             email
@@ -134,6 +127,7 @@
             name="email"
             ngModel
             required
+            [(ngModel)]="Email"
             #email="ngModel"
             email
           />
@@ -148,6 +142,7 @@
             class="form-control"
             name="country"
             ngModel
+            [(ngModel)]="Country"
             required
             #country="ngModel"
           />
@@ -161,6 +156,7 @@
             type="text"
             class="form-control"
             name="streetaddress"
+            [(ngModel)]="Street_Address"
             ngModel
             required
             #streetaddress="ngModel"
@@ -178,6 +174,7 @@
             class="form-control"
             name="suburb"
             ngModel
+            [(ngModel)]="Suburb"
             required
             #suburb="ngModel"
           />
@@ -192,6 +189,7 @@
             class="form-control"
             name="city"
             ngModel
+            [(ngModel)]="City"
             required
             #city="ngModel"
           />
@@ -206,6 +204,7 @@
             class="form-control"
             name="postalcode"
             ngModel
+            [(ngModel)]="Postal_Code"
             required
             #postalcode="ngModel"
           />

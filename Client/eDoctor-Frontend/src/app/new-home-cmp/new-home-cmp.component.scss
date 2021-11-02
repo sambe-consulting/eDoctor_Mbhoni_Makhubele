@@ -1,0 +1,41 @@
+.container {
+  margin: 0px;
+  padding: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  // width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.vl {
+  border-left: 1px solid rgb(92, 95, 92);
+  height: 500px;
+  position: absolute;
+  left: 29.2%;
+  margin-left: -3px;
+  top: 15%;
+}
+
+.vl-2 {
+  border-left: 97.5vw solid rgb(92, 95, 92);
+  height: 1px;
+  position: absolute;
+  left: 1.2%;
+  margin-left: -3px;
+  top: 15%;
+}

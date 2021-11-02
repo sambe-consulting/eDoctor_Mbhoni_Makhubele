@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModelsService } from '../models/models.service';
+import { Sector } from '../models/sector';
 import { UrlService } from '../url.service';
 
 @Component({
@@ -10,26 +11,24 @@ import { UrlService } from '../url.service';
   styleUrls: ['./sector-profile.component.scss'],
 })
 export class SectorProfileComponent implements OnInit {
-  ID_Number = ""
-  Name = ""
-  Owner = ""
-  Website = ""
-  B_Hours_Open = ""
-  B_Hours_Close = ""
-  Founded = ""
-  Description = ""
-  Consultation = ""
-  Contact = ""
-  Email = ""
-  Aproval = ""
+  ID_Number = '';
+  Name = '';
+  Owner = '';
+  Website = '';
+  B_Hours_Open = '';
+  B_Hours_Close = '';
+  Founded = '';
+  Description = '';
+  Consultation = '';
+  Contact = '';
+  Email = '';
+  Aproval = '';
 
-  Country = ""
-  Street_Address = ""
-  Suburb = ""
-  City = ""
-  Postal_Code = ""
-
-
+  Country = '';
+  Street_Address = '';
+  Suburb = '';
+  City = '';
+  Postal_Code = '';
 
   sector: any | undefined;
   correctPassword = true;
@@ -42,13 +41,22 @@ export class SectorProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+    this.sector = this._modelsService.getSector();
+    this.Name = this.sector?.Name;
+    this.Owner = this.sector?.Founder;
+    this.Website = this.sector?.Website;
+    this.B_Hours_Open = this.sector?.B_Hours_Open;
+    this.B_Hours_Close = this.sector?.B_Hours_Close;
+    this.Founded = this.sector?.Founded;
+    this.Description = this.sector?.Description;
+    this.Contact = this.sector?.Contact;
+    this.Email = this.sector?.Email;
   }
 
   updateProfile(form: NgForm) {}
 
   updatePass(form: NgForm) {
-    this.sector = this._modelsService.getSector()
+    this.sector = this._modelsService.getSector();
     //   this.patient = this._modelsService.getUser();
     //   if (this.patient.Password == form.value.oldpassword) {
     //     if (form.value.newpassword == form.value.confirmpassword) {

@@ -30,6 +30,9 @@ export class ModelsService {
   private patien = new BehaviorSubject<Object>(__values);
   patien_cast = this.patien.asObservable();
 
+  _sector = new BehaviorSubject<Object>(__values);
+  sector_cast = this._sector.asObservable();
+
   private location = new BehaviorSubject<Object>(__values);
   location_cast = this.location.asObservable();
 
@@ -97,8 +100,15 @@ export class ModelsService {
       data['Contact'],
       data['Email'],
       data['Aproval'],
-      data['Password']
+      data['Password'],
+      // data['Country'],
+      // data['Street'],
+      // data['Suburb'],
+      // data['City'],
+      // data['Postal_Code']
     );
+
+
   }
 
   setLocation(lng: any, lat: any) {
@@ -114,7 +124,9 @@ export class ModelsService {
     return this.lng;
   }
 
-  getSector() {}
+  getSector() {
+    return this.sector;
+  }
 
   getAdmin() {}
 
@@ -139,11 +151,13 @@ export class ModelsService {
           val['Contact'],
           val['Email'],
           val['Aproval'],
-          val['Password']
+          val['Password'],
+
         );
 
         this.sectors.push(sector);
       }
+      this.sectors = [];
     });
     return this.sectors;
   }
@@ -160,13 +174,19 @@ export class ModelsService {
     var _postion = new BehaviorSubject<any>(__values);
     var pos_cast = _postion.asObservable();
 
-    navigator.geolocation.getCurrentPosition(function (position) {
-      var loc = {
-        lng: position.coords.longitude,
-        lat: position.coords.latitude,
-      };
-      _postion.next(loc);
-    });
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        var loc = {
+          lng: position.coords.longitude,
+          lat: position.coords.latitude,
+        };
+        _postion.next(loc);
+      },
+      (error) => {
+        // console.log(error)
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 10000 }
+    );
 
     return pos_cast;
   }
@@ -178,6 +198,7 @@ export class ModelsService {
     this.http
       .get(this.url.getUrl() + 'appointments/' + id)
       .subscribe((data: any) => {
+        this.appointments = [];
         for (var val of data) {
           let apmnt = new Appointment(
             val['id'],
@@ -191,7 +212,11 @@ export class ModelsService {
             val['SpecialistID'],
             val['Lng'],
             val['Lat'],
-            val['Address']
+            val['Address'],
+            val['Specialist_Name'],
+            val['Patient_Name'],
+            val['Patient_Middle_Name'],
+            val['Patient_Surname']
           );
           this.appointments.push(apmnt);
         }
@@ -208,6 +233,7 @@ export class ModelsService {
     this.http
       .get(this.url.getUrl() + 'appointments/' + this._userID_Service.getID())
       .subscribe((data: any) => {
+        this.appointments = [];
         for (var val of data) {
           let apmnt = new Appointment(
             val['id'],
@@ -221,7 +247,11 @@ export class ModelsService {
             val['SpecialistID'],
             val['Lng'],
             val['Lat'],
-            val['Address']
+            val['Address'],
+            val['Specialist_Name'],
+            val['Patient_Name'],
+            val['Patient_Middle_Name'],
+            val['Patient_Surname']
           );
           this.appointments.push(apmnt);
         }

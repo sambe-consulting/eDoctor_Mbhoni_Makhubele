@@ -186,6 +186,29 @@ class Database():
         self.connection.close()
         return row    
 
-#endregion                
+#endregion        
+        
+    def AddAvailability(self, query: str):
+        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(query)
+        self.connection.commit()
+        self.connection.close()
 
+    def getAvailability(self, query: str):
+        self.connection = sqlite3.connect('././Service/Flask-App/database/db/eDoctor.db')        
+        self.cursor = self.connection.cursor()
+        self.cursor.execute(query)
+        row = self.cursor.fetchall()
+        self.connection.commit()
+        self.connection.close()
+        return row    
+
+    
+    
+
+
+    
+
+    
 

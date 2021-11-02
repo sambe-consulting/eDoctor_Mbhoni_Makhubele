@@ -169,6 +169,7 @@
         type="password"
         class="form-control"
         name="password"
+        minlength="6"
         ngModel
         required
         #password="ngModel"
@@ -181,6 +182,14 @@
         >Required field!</span
       >
 
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="password.errors?.minlength"
+      >
+        Password must be at least 6 characters long.
+      </span>
+
       <span style="color: red" class="help-block" *ngIf="!passwordMatch">
         Password does not match!</span
       >
@@ -191,6 +200,7 @@
         type="password"
         class="form-control"
         name="confirmpassword"
+        minlength="6"
         ngModel
         required
         #confirmpassword="ngModel"
@@ -205,6 +215,13 @@
         "
         >Required field!</span
       >
+      <span
+        style="color: red"
+        class="help-block"
+        *ngIf="confirmpassword.errors?.minlength"
+      >
+        Password must be at least 6 characters long.
+      </span>
 
       <span style="color: red" class="help-block" *ngIf="!passwordMatch">
         Password does not match!</span
@@ -304,7 +321,7 @@
       <br />
 
       <label>Geolocation</label><br />
-      <div style="height: 500px; margin-top: 10px;">
+      <div style="height: 500px; margin-top: 10px">
         <app-map></app-map>
       </div>
 
@@ -314,7 +331,12 @@
         <p>{{ registerErrorMessage }}</p>
       </div>
 
-      <input style="top: 500px;" class="LoginBtn" type="submit" value="Register" /><br /><br />
+      <input
+        style="top: 500px"
+        class="LoginBtn"
+        type="submit"
+        value="Register"
+      /><br /><br />
 
       <!-- [disabled]="!registerForm.valid" -->
       <p style="float: right; margin-right: 10.5%">
@@ -322,7 +344,7 @@
         <span>&nbsp;<a routerLink="/login" class="signup">Sign in</a></span>
       </p>
       <br />
-      <br>
+      <br />
     </form>
   </div>
 </div>

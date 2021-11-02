@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <div class="application-form">
+        <form #form="ngForm">
+          <div>
+            <div>
+              <p style="font-weight: bold; font-size: 28px">
+                {{ sector_Name }}
+              </p>
+            </div>
+            <p style="font-size: large">Date:</p>
+            <input
+              type="date"
+              name="date"
+              class="form-control datepicker"
+              ngModel
+              min="{{ minDate }}"
+              [(ngModel)]="slotDate"
+            />
+            <br />
+            <p style="font-size: large">Choose Time:</p>
+            <div class="slots">
+              <a *ngFor="let slot of filtered_Slots" class="slot"> {{ slot.time }} </a>
+            </div>
+            <br />
+            <p style="font: large">Reason for visit:</p>
+            <div class="description">
+              <textarea class="form-control" name="reason"></textarea>
+            </div>
+            <br />
+            <div style="text-align: center">
+              <a class="book-appointment" (click)="Submit(form)"
+                >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Book
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a
+              >
+            </div>
+            <br />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

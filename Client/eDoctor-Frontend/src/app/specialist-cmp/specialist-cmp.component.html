@@ -1,0 +1,82 @@
+<div class="w3-container">
+  <div class="row">
+    <div class="specialist-root">
+      <div style="font-weight: bold; font-size: 25px">
+        <p>Specialists</p>
+        <hr style="width: 55vw; position: absolute; left: 41%; top: 17%" />
+      </div>
+      <div>
+        <div *ngFor="let sector of sectors">
+          <div class="specialist">
+            <p style="font-weight: bolder; font-size: 30px">
+              {{ sector.Name }}
+            </p>
+            <p style="font-weight: bolder">
+              <span
+                ><a href="mailto:info@edoctor.com">{{ sector.Email }}</a></span
+              >&nbsp;&nbsp;|
+              <span
+                ><a href="tel:+4733378901">{{ sector.Contact }}</a></span
+              >
+            </p>
+            <a
+              href="https://www.pml.com"
+              target="_blank"
+              style="font-weight: bolder"
+              >{{ sector.Website }}</a
+            >
+
+            <div style="line-height: 70%">
+              <br />
+            </div>
+
+            <p style="font-weight: bolder">
+              {{ sector.Address }}
+            </p>
+            <p style="font-weight: bolder">
+              {{ sector.B_Hours_Open }} - {{ sector.B_Hours_Close }}
+            </p>
+            <hr />
+            <p style="font-weight: bolder; font-size: 20px">Medical services</p>
+            <ul>
+              <li>Clinical oncologist</li>
+              <li>Dermatology</li>
+              <li>Gynaecology</li>
+              <li>Neurology</li>
+            </ul>
+            <hr />
+            <div style="line-height: 70%">
+              <br />
+            </div>
+            <div style="text-align: center">
+              <input
+                value="Book Appointment"
+                type="submit"
+                (click)="bookAppointment(sector.id, sector.Name)"
+                class="book-appointment"
+              />
+            </div>
+            <div style="line-height: 40%">
+              <br />
+            </div>
+          </div>
+          <br />
+          <br />
+        </div>
+
+
+        <div class="application-form-div">
+          <div class="application-form-heading">
+            <p style="font-weight: bolder; font-size: large;" >
+              Appointment Form
+            </p>
+          </div>
+          <br />
+          <div *ngIf="openForm" class="application-form">
+            <app-booking-cmp></app-booking-cmp>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

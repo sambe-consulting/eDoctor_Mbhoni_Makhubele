@@ -1,0 +1,22 @@
+.specialists {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  border-width: 2px;
+  width: 500px;
+}
+
+.sectors {
+  background-color: #343b3b;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  padding: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.sectors p {
+  color: white;
+}
+/*# sourceMappingURL=patients.component.css.map */

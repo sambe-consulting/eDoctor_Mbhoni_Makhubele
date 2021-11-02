@@ -21,6 +21,22 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { SectorProfileComponent } from './sector-profile/sector-profile.component';
 import { MapComponent } from './map/map.component';
 import { DirectionComponent } from './direction/direction.component';
+import { PatientsComponent } from './patients/patients.component';
+import { SectorsComponent } from './sectors/sectors.component';
+import { SectorsOnMapComponent } from './sectors-on-map/sectors-on-map.component';
+import { SpecialistCMPComponent } from './specialist-cmp/specialist-cmp.component';
+import { AppointmentsCMPComponent } from './appointments-cmp/appointments-cmp.component';
+import { NewHomeCMPComponent } from './new-home-cmp/new-home-cmp.component';
+import { BookingCMPComponent } from './booking-cmp/booking-cmp.component';
+import { AppointmentOnSpecialistComponent } from './appointment-on-specialist/appointment-on-specialist.component';
+import { AvailabilityComponent } from './availability/availability.component';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -41,6 +57,15 @@ import { DirectionComponent } from './direction/direction.component';
     SectorProfileComponent,
     MapComponent,
     DirectionComponent,
+    PatientsComponent,
+    SectorsComponent,
+    SectorsOnMapComponent,
+    SpecialistCMPComponent,
+    AppointmentsCMPComponent,
+    NewHomeCMPComponent,
+    BookingCMPComponent,
+    AppointmentOnSpecialistComponent,
+    AvailabilityComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,8 +73,10 @@ import { DirectionComponent } from './direction/direction.component';
     NgbModule,
     FormsModule,
     HttpClientModule,
+    DateInputsModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

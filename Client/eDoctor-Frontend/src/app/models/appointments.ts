@@ -11,6 +11,10 @@ export class Appointment {
   lng = 0;
   lat = 0;
   address = '';
+  sector_name = '';
+  patient_name = '';
+  patient_middle_name = '';
+  patient_surname = '';
   constructor(
     id: any,
     subject: any,
@@ -24,7 +28,12 @@ export class Appointment {
 
     lng: any,
     lat: any,
-    address: any
+    address: any,
+
+    sector_name: any,
+    patient_name: any,
+    patient_middle_name: any,
+    patient_surname: any
   ) {
     this.id = id;
     this.Subject = subject;
@@ -37,6 +46,10 @@ export class Appointment {
     this.lng = lng;
     this.lat = lat;
     this.address = address;
+    this.sector_name = sector_name;
+    this.patient_name = patient_name;
+    this.patient_middle_name = patient_middle_name;
+    this.patient_surname = patient_surname;
   }
 
   getDate() {
@@ -45,5 +58,34 @@ export class Appointment {
 
   getTime() {
     return this.AppDate.substring(11, 19);
+  }
+
+  getStatus() {
+    if (this.Status == '0') {
+      return 'Await approval';
+    } else if (this.Status == '1') {
+      return 'Approved';
+    } else if (this.Status == '2') {
+      return 'Cancelled';
+    } else {
+      return 'Rejected';
+    }
+    return null;
+  }
+
+  approved() {
+    if (this.Status == '1') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getClue() {
+    if (this.Status == '0') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -1,0 +1,17 @@
+<app-home *ngIf="loggin === false"></app-home>
+<div style="width: 99.1%">
+  <!-- <div class="vl-2"></div> -->
+  <div class="row">
+    <div class="column" style="width: 30%; padding: 40px" *ngIf="loggin === true" >
+      <app-appointments-cmp *ngIf="usertype === '1' && loggin === true"></app-appointments-cmp>
+
+      <app-appointment-on-specialist *ngIf="usertype === '3' && loggin === true"></app-appointment-on-specialist>
+    </div>
+
+    <!-- <div class="vl"></div> -->
+    <div class="column" style="width: 70%; padding: 40px" *ngIf="loggin === true" >
+      <app-specialist-cmp *ngIf="usertype === '1' && loggin === true"></app-specialist-cmp>
+      <app-availability *ngIf="usertype === '3' && loggin === true"></app-availability>
+    </div>
+  </div>
+</div>

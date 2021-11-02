@@ -8,6 +8,8 @@ import { ModelsService } from '../models/models.service';
 import { UrlService } from '../url.service';
 import { UserIDService } from '../user-id.service';
 import { Appointment } from '../models/appointments';
+import { CookieService } from 'ngx-cookie-service';
+import { UsertypeService } from '../services/usertype.service';
 
 @Component({
   selector: 'app-login',
@@ -51,15 +53,15 @@ export class LoginComponent implements OnInit {
     private route: Router,
     private _modelsService: ModelsService,
     private _url: UrlService,
-    private _userID_Service: UserIDService
+    private _userID_Service: UserIDService,
+    private userType_Service: UsertypeService,
+    private cookie: CookieService
   ) {}
 
   ngOnInit() {
     this._userservice.cast.subscribe((status) => (this.LoggedIn = status));
     this._userservice.userType_Cast.subscribe((type) => (this.userType = type));
   }
-
-
 
   login(form: NgForm) {
     if (form.valid) {
@@ -78,25 +80,26 @@ export class LoginComponent implements OnInit {
             this.loginMonitor = true;
             this.loginErrorMessage = 'A user with this email does not exist';
           } else {
-
             this.loginMonitor = false;
             this.id = data['ID_Number'];
             if (this.id.length != 13) {
               this._userservice.updateSectorID(this.id);
-              console.log('Its sector');
+              this._modelsService._sector.next(data['Name']);
               this._modelsService.SectorLogingIn(data);
               this._userservice.updateSectorID(data['ID_Number']);
               this._userservice.updateUserType(3);
+              this.cookie.set('id', this.id);
+              this.userType_Service.set(3);
             } else {
               this._userservice.updateUserType(data['Type']);
               //this._modelsService.UserloggingIn(data); // I must change this one and uses subject, which is on the next line
               this._modelsService.updatePatient(data);
               this._userservice.setUserID(data['ID_Number']);
               this._userID_Service.setID(data['ID_Number']);
-              console.log('Its user');
+              this._modelsService._sector.next(data['Name']);
+              this.cookie.set('id', this.id);
+              this.userType_Service.set(1);
             }
-            console.log(this.id.length);
-            console.log(this.userType);
             this._userservice.updateLoginStatus(true);
             this.route.navigate(['']);
           }

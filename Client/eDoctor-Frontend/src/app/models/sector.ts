@@ -17,6 +17,7 @@ export class Sector {
   Approved = 0;
   Password = '';
   distance = 0;
+
   constructor(
     id: string,
     Name: string,
@@ -58,6 +59,7 @@ export class Sector {
   setDistance(distance: number) {
     this.distance = distance;
   }
+
 
   getDistance() {
     return this.distance;

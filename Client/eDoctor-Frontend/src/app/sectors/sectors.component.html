@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="specialists">
+      <div style="text-align: center; font-weight: bold; font-size: large">
+        Health Sectors[{{ length }}]
+        <hr />
+      </div>
+      <div *ngFor="let patient of sectors">
+        <div class="sectors">
+          <div style="font-weight: bold; font-size: 25px">
+            <p>{{ patient.Name }}</p>
+          </div>
+          <div>
+            <p>Contact: {{ patient.Contact }}</p>
+            <p>Email: {{ patient.Email }}</p>
+            <p>
+              Website:
+              <span
+                ><a href="{{ patient.Website }}" target="_blank">{{
+                  patient.Website
+                }}</a></span
+              >
+            </p>
+            <p>Founder: {{ patient.Founder }}</p>
+            <p>Address: {{ patient.Address }}</p>
+            <p>
+              Business Hours: {{ patient.B_Hours_Open }} -
+              {{ patient.B_Hours_Close }}
+            </p>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>

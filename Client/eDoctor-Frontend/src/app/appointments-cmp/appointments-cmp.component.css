@@ -1,0 +1,21 @@
+.appointments {
+  background-color: white;
+  width: 20vw;
+  height: auto;
+  padding: 5%;
+  border-radius: 4px;
+  -webkit-box-shadow: 10px 10px 70px 10px grey;
+          box-shadow: 10px 10px 70px 10px grey;
+}
+
+.buttons {
+  width: 35%;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+}
+
+.buttons:hover {
+  background-color: #dbdbdb;
+}
+/*# sourceMappingURL=appointments-cmp.component.css.map */

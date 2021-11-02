@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="specialists">
+      <div style="text-align: center; font-weight: bold; font-size: large">
+        Patients[{{length}}]
+        <hr />
+      </div>
+      <div *ngFor="let patient of patients">
+        <div class="sectors">
+          <div style="font-weight: bold; font-size: 25px">
+            <p>{{ patient.Name }} {{ patient.M_Name }} {{ patient.Surname }}</p>
+          </div>
+          <div>
+            <p>Contact: {{ patient.Contact }}</p>
+            <p>Email: {{ patient.Email }}</p>
+            <p>Date of birth: {{ patient.getDOB() }}</p>
+            <p>Gender: {{ patient.Gender }}</p>
+            <p>Identity number: {{ patient.ID_Number }}</p>
+          </div>
+        </div>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>

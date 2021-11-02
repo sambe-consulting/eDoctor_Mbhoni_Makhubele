@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 import { Subscription } from 'rxjs';
 import { ModelsService } from '../models/models.service';
+import { UsertypeService } from '../services/usertype.service';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -17,7 +19,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private _userservice: UsersService,
-    private _modelsService: ModelsService
+    private _modelsService: ModelsService,
+    private cookie: CookieService,
+    private usertype: UsertypeService
   ) {}
 
   ngOnInit() {
@@ -34,12 +38,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
 
     this._modelsService.patien_cast.subscribe((data: any) => {
-      this.name = data["Name"];
+      this.name = data['Name'];
+    });
+
+    this._modelsService.sector_cast.pipe().subscribe((data: any) => {
+      this.name = data;
     });
   }
 
   logout() {
     this._userservice.updateLoginStatus(false);
+    this.usertype.set(-1);
   }
 
   profile() {}

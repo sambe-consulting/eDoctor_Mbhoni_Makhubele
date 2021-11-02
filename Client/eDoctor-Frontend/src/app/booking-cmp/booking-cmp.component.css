@@ -1,0 +1,44 @@
+.container {
+  margin: 0%;
+}
+
+.application-form {
+  background-color: white;
+  width: 28vw;
+  padding: 2.8%;
+  height: auto;
+}
+
+.slot {
+  padding: 9px;
+  border-color: #343b3b;
+  border-style: solid;
+  color: #343b3b;
+  border-radius: 2.5px;
+  font-weight: bold;
+}
+
+.slot:hover {
+  background-color: #343b3b;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.book-appointment {
+  border-style: solid;
+  border-color: #343b3b;
+  color: #343b3b;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 1.5px;
+  font-weight: bolder;
+}
+
+.book-appointment:hover {
+  background-color: #343b3b;
+  color: white;
+}
+/*# sourceMappingURL=booking-cmp.component.css.map */

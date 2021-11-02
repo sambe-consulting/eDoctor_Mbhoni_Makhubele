@@ -36,6 +36,17 @@
     <li
       class="nav-item"
       style="margin-left: 0px"
+      *ngIf="loggedIn && type === 0"
+    >
+      <a routerLink="/updateuser" class="nav-link"
+        ><span><img src="./assets/images/user.png" style="width: 23px" /></span
+        >&nbsp;{{ name }}</a
+      >
+    </li>
+
+    <li
+      class="nav-item"
+      style="margin-left: 0px"
       *ngIf="loggedIn && type === 3"
       (click)="profile()"
     >

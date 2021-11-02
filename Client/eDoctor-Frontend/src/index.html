@@ -5,6 +5,7 @@
     <title>e-Doctor</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
     <!-- <link rel="icon" type="image/x-icon" href="favicon.ico"> -->
     <link rel="icon" type="image/x-icon" href="./assets/images/doctor.png" />
     <link
@@ -27,8 +28,29 @@
       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
       type="text/css"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059"
+    />
   </head>
   <body>
     <app-root></app-root>
+
+    <!-- <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script> -->
+
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
   </body>
 </html>

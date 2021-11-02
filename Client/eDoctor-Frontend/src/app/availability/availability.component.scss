@@ -1,0 +1,85 @@
+.availability {
+  background-color: white;
+  width: 12vw;
+  padding: 20px;
+  box-shadow: 10px 10px 70px 10px grey;
+  height: auto;
+  border-radius: 4px;
+}
+
+.datepicker {
+  width: 9.6vw;
+}
+
+.book-appointment {
+  border-style: solid;
+  border-color: #343b3b;
+  color: #343b3b;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 1.5px;
+  font-weight: bolder;
+}
+
+.book-appointment:hover {
+  background-color: #343b3b;
+  color: white;
+}
+
+.vl {
+  border-left: 1.9px solid rgb(133, 136, 133);
+  height: 334px;
+  position: absolute;
+  left: 45%;
+  margin-left: -3px;
+  top: 23%;
+}
+
+.slots {
+  position: absolute;
+  left: 47%;
+  top: 22.5%;
+  padding: 15px;
+  width: 50.5vw;
+  height: auto;
+  background-color: white;
+
+  border-radius: 4px;
+  box-shadow: 10px 10px 70px 10px grey;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+
+.datefilter {
+  width: 9.6vw;
+  margin-right: 3%;
+}
+.slot {
+  margin-top: 10%;
+  // width: 20vw;
+  margin-right: 30%;
+}
+
+
+
+
+.button {
+  border-style: solid;
+  border-color: #343b3b;
+  background-color: white;
+  color: #343b3b;
+  // padding: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 1.5px;
+  font-weight: bolder;
+}
+
+.button:hover {
+  background-color: #343b3b;
+  color: white;
+}
