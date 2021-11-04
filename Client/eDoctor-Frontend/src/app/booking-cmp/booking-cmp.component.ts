@@ -6,8 +6,10 @@ import { NgForm } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 import { Slot } from '../models/slot';
+import { AppointmentService } from '../services/appointment.service';
 import { AvailabilityService } from '../services/availability.service';
 import { BookingService } from '../services/booking.service';
+import { SuccessService } from '../services/success.service';
 
 @Component({
   selector: 'app-booking-cmp',
@@ -27,13 +29,17 @@ export class BookingCMPComponent implements OnInit, DoCheck, OnChanges {
   select_Date_Cast = this.selectedDate.asObservable();
   formValid = true;
 
+
+
   choosenSlot = '...';
   SlotChoosen = true;
   constructor(
     private booking: BookingService,
     private availability: AvailabilityService,
     private differs: KeyValueDiffers,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private appointment: AppointmentService,
+    private success: SuccessService
   ) {
     this.differ = this.differs.find({}).create();
   }
@@ -57,9 +63,8 @@ export class BookingCMPComponent implements OnInit, DoCheck, OnChanges {
       .subscribe((data: any) => {
         this.slots = data;
         this.filtered_Slots = [];
-
         for (var slot of this.slots) {
-          if (slot.date == this.slotDate) {
+          if (slot.date == this.slotDate && slot.status == 0) {
             this.filtered_Slots.push(slot);
           }
         }
@@ -80,7 +85,7 @@ export class BookingCMPComponent implements OnInit, DoCheck, OnChanges {
   ngDoCheck() {
     this.filtered_Slots = [];
     for (var slot of this.slots) {
-      if (slot.date == this.slotDate) {
+      if (slot.date == this.slotDate && slot.status == 0) {
         this.filtered_Slots.push(slot);
       }
     }
@@ -96,9 +101,24 @@ export class BookingCMPComponent implements OnInit, DoCheck, OnChanges {
     }
 
     if (form.valid && this.choosenSlot != '...') {
-      console.log(form.value.reason);
-      console.log(this.cookie.get('id'))
+      var data = {
+        Subject: 'None',
+        Description: form.value.reason,
+        Date: this.slotDate + ' ' + this.choosenSlot,
+        Duration: '1',
+        Patient_ID: this.cookie.get('id'),
+        Specialist_ID: this.booking.getSectorID().toString(),
+      };
+
+      this.appointment.bookAppointment(
+        data,
+        this.choosenSlot,
+        this.slotDate,
+        this.booking.getSectorID()
+      );
     }
+
+
 
     setTimeout(() => {
       this.formValid = true;

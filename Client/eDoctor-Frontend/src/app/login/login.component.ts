@@ -10,6 +10,7 @@ import { UserIDService } from '../user-id.service';
 import { Appointment } from '../models/appointments';
 import { CookieService } from 'ngx-cookie-service';
 import { UsertypeService } from '../services/usertype.service';
+import { UpdateusersService } from '../services/updateusers.service';
 
 @Component({
   selector: 'app-login',
@@ -55,7 +56,8 @@ export class LoginComponent implements OnInit {
     private _url: UrlService,
     private _userID_Service: UserIDService,
     private userType_Service: UsertypeService,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private UpdateState: UpdateusersService
   ) {}
 
   ngOnInit() {
@@ -90,6 +92,10 @@ export class LoginComponent implements OnInit {
               this._userservice.updateUserType(3);
               this.cookie.set('id', this.id);
               this.userType_Service.set(3);
+
+              this.cookie.set('type', '3');
+              this.cookie.set('loggedin', 'true');
+              this.cookie.set('name', data['Name']);
             } else {
               this._userservice.updateUserType(data['Type']);
               //this._modelsService.UserloggingIn(data); // I must change this one and uses subject, which is on the next line
@@ -97,9 +103,15 @@ export class LoginComponent implements OnInit {
               this._userservice.setUserID(data['ID_Number']);
               this._userID_Service.setID(data['ID_Number']);
               this._modelsService._sector.next(data['Name']);
-              this.cookie.set('id', this.id);
+              this.cookie.set('id', data['ID_Number']);
               this.userType_Service.set(1);
+
+              this.cookie.set('loggedin', 'true');
+              this.cookie.set('type', '1');
+              this.cookie.set('name', data['Name']);
             }
+
+            this.UpdateState.updateState.next(false);
             this._userservice.updateLoginStatus(true);
             this.route.navigate(['']);
           }

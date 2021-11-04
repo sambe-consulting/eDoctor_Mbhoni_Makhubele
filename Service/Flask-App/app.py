@@ -635,7 +635,7 @@ class BookSpecialist(Resource):
                                         "SectorID)"\
                                         "VALUES('" + appointment.subject + "','"\
                                                    + appointment.description + "','"\
-                                                   + appointment.appointmentDatetime() + "','"\
+                                                   + appointment.date + "','"\
                                                    + appointment.duration + "','"\
                                                    + appointment.dateCreated + "','"\
                                                    + appointment.status + "','"\
@@ -647,10 +647,7 @@ class BookSpecialist(Resource):
                                                     
         
         data.BookAppointment(query)
-        return {
-            "code": 1,
-            "message": "Booking sent"
-        }
+        return 1
         # return appointment.appointmentDatetime()
                                                   
 
@@ -760,9 +757,9 @@ class deleteSlot(Resource):
         return 1
 
 class slot_taken(Resource):
-    def put(self,id):
+    def put(self,time, date):
         data = Database()
-        query = "UPDATE Time SET taken=1 WHERE id='" + id + "'"
+        query = "UPDATE Time SET taken=1 WHERE (time='" + time + "' AND date='" + date + "')"
         data.AddAvailability(query)
         return 1
 
@@ -775,7 +772,7 @@ class slot_free(Resource):
 
 
 api.add_resource(slot_free,'/slot_free/<string:id>')
-api.add_resource(slot_taken,'/slot_taken/<string:id>')
+api.add_resource(slot_taken,'/slot_taken/<string:time>/<string:date>')
 api.add_resource(deleteSlot, '/removeslot/<string:id>')
 api.add_resource(GetAvailability,'/getavailability/<string:id>')
 api.add_resource(Add_Time, '/addavailability')

@@ -15,6 +15,7 @@ export class Appointment {
   patient_name = '';
   patient_middle_name = '';
   patient_surname = '';
+
   constructor(
     id: any,
     subject: any,
@@ -50,14 +51,15 @@ export class Appointment {
     this.patient_name = patient_name;
     this.patient_middle_name = patient_middle_name;
     this.patient_surname = patient_surname;
+    this.Description = description;
   }
 
   getDate() {
-    return this.AppDate.substring(0, 10);
+    return this.DateCreated;
   }
 
   getTime() {
-    return this.AppDate.substring(11, 19);
+    return this.AppDate.substring(11, 15);
   }
 
   getStatus() {

@@ -5,21 +5,26 @@
         <p>Appointments</p>
         <hr />
       </div>
-      <div class="appointments">
+      <div class="appointments" *ngFor="let appointment of appointment_Arr">
         <div style="text-align: center">
-          <p style="font-weight: bold; font-size: 23px">PML Mens Clinic</p>
-          <img src="./assets/images/time.png" style="width: 12%" /><br><br>
+          <p style="font-weight: bold; font-size: 23px">
+            {{ appointment.sector_name }}
+          </p>
+          <img src="./assets/images/time.png" style="width: 12%" /><br /><br />
           <p style="font-weight: bold; font-size: 15px">
-            10 January 2021 | 13:00:00
+            {{appointment.getDate()}} | {{appointment.getTime()}}
           </p>
 
-          <img src="./assets/images/address.png" style="width: 12%" /><br><br>
+          <img
+            src="./assets/images/address.png"
+            style="width: 12%"
+          /><br /><br />
           <p style="font-weight: bold; font-size: 14px">
-            SA, 14409 Street, Ivory park, Johannesburg
+            {{ appointment.address }}
           </p>
           <p>
-            <span style="font-weight: bolder">Description:</span> I am having
-            headache almost every day
+            <span style="font-weight: bolder">Description:</span>
+            {{ appointment.Description }}
           </p>
           <p style="font-weight: bolder">Appointment await aproval</p>
         </div>

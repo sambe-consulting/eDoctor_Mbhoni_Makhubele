@@ -11,7 +11,7 @@ import { UrlService } from '../url.service';
   providedIn: 'root',
 })
 export class AvailabilityService {
-  availability = new BehaviorSubject<Object>([]);
+  availability = new BehaviorSubject<Slot[]>([]);
   availability_cast = this.availability.asObservable();
 
   dateController = true;
@@ -31,7 +31,7 @@ export class AvailabilityService {
         // this.availability.next(data);
         var arr_slots = [];
         for (var _slot of data) {
-          var slot = new Slot(_slot[0], _slot[1], _slot[2], _slot[3]);
+          var slot = new Slot(_slot[0], _slot[1], _slot[2], _slot[3], _slot[4]);
           arr_slots.push(slot);
         }
         this.availability.next(arr_slots);
@@ -40,7 +40,7 @@ export class AvailabilityService {
     return this.availability_cast;
   }
 
-  getSectorAvailability(id: any){
+  getSectorAvailability(id: any) {
     this.http
       .get(this.url.getUrl() + 'getavailability/' + id)
       .pipe()
@@ -48,7 +48,7 @@ export class AvailabilityService {
         // this.availability.next(data);
         var arr_slots = [];
         for (var _slot of data) {
-          var slot = new Slot(_slot[0], _slot[1], _slot[2], _slot[3]);
+          var slot = new Slot(_slot[0], _slot[1], _slot[2], _slot[3], _slot[4]);
           arr_slots.push(slot);
         }
         this.availability.next(arr_slots);

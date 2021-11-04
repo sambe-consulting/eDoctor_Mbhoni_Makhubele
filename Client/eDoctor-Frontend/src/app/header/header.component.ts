@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 import { Subscription } from 'rxjs';
 import { ModelsService } from '../models/models.service';
+import { UpdateusersService } from '../services/updateusers.service';
 import { UsertypeService } from '../services/usertype.service';
 import { UsersService } from '../users.service';
 
@@ -21,34 +23,44 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private _userservice: UsersService,
     private _modelsService: ModelsService,
     private cookie: CookieService,
-    private usertype: UsertypeService
+    private usertype: UsertypeService,
+    private updateState: UpdateusersService,
+    private route: Router
   ) {}
 
   ngOnInit() {
-    this._userservice.cast.subscribe(
-      (status) => (
-        (this.loggedIn = status),
-        console.log('On header'),
-        console.log(this.loggedIn)
-      )
-    );
+    this.updateState.updateState_Cast.pipe().subscribe((data: any) => {
+      if (this.cookie.get('loggedin') == 'true') {
+        this.loggedIn = true;
+      } else if (this.cookie.get('loggedin') == 'false') {
+        this.loggedIn = false;
+      }
 
-    this._userservice.userType_Cast.subscribe((type) => {
-      (this.type = type), console.log('user Type:' + this.type.toString());
+      this.type = Number(this.cookie.get('type'));
+
+      this.name = this.cookie.get('name');
+
+      console.log('Logged Out');
     });
 
-    this._modelsService.patien_cast.subscribe((data: any) => {
-      this.name = data['Name'];
-    });
+    if (this.cookie.get('loggedin') == 'true') {
+      this.loggedIn = true;
+    }
 
-    this._modelsService.sector_cast.pipe().subscribe((data: any) => {
-      this.name = data;
-    });
+    this.type = Number(this.cookie.get('type'));
+
+    this.name = this.cookie.get('name');
   }
 
   logout() {
-    this._userservice.updateLoginStatus(false);
-    this.usertype.set(-1);
+    // this._userservice.updateLoginStatus(false);
+    // this.usertype.set(-1);
+
+    this.cookie.set('type', '-1');
+    this.cookie.set('loggedin', 'false');
+
+    this.updateState.updateState.next(false);
+    // this.route.navigate(['']);
   }
 
   profile() {}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Appointment } from '../models/appointments';
+import { AppointmentService } from '../services/appointment.service';
 import { BookingService } from '../services/booking.service';
 
 @Component({
@@ -7,8 +9,15 @@ import { BookingService } from '../services/booking.service';
   styleUrls: ['./appointments-cmp.component.scss'],
 })
 export class AppointmentsCMPComponent implements OnInit {
-  constructor() {}
+  appointment_Arr: Appointment[] = [];
+  constructor(private appointment_Service: AppointmentService) {}
 
   ngOnInit(): void {
+    this.appointment_Service
+      .getAppointment()
+      .pipe()
+      .subscribe((data: any) => {
+        this.appointment_Arr = data;
+      });
   }
 }
